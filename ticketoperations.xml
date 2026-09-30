@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <name>Ticket Operations</name>
+    <name>TicketOps</name>
     <key>ticketoperations</key>
     <state>development</state>
     <description>
         <short>Safe, auditable ticket operations for GLPI.</short>
-        <long>Ticket Operations provides controlled tools for diagnosing and operating on GLPI tickets.</long>
+        <long>TicketOps provides controlled tools for diagnosing and operating on GLPI tickets.</long>
     </description>
-    <homepage>https://github.com/TiniSys-IT-Solutions/glpi-ticket-operations</homepage>
-    <download>https://github.com/TiniSys-IT-Solutions/glpi-ticket-operations/releases</download>
-    <issues>https://github.com/TiniSys-IT-Solutions/glpi-ticket-operations/issues</issues>
+    <homepage>https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops</homepage>
+    <download>https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases</download>
+    <issues>https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/issues</issues>
     <authors>
         <author>TiniSys IT Solutions</author>
     </authors>

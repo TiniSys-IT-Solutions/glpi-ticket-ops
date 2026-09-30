@@ -1,6 +1,18 @@
-# Ticket Operations (TicketOps)
+<p align="center">
+  <img src="public/logo.png" alt="TicketOps" width="220">
+</p>
 
-Ticket Operations is a GLPI 11 plugin for safe, previewed and controlled operations on existing tickets.
+<h1 align="center">TicketOps</h1>
+
+<p align="center">
+  <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases"><img src="https://img.shields.io/badge/version-0.0.1-0ea5e9" alt="Version 0.0.1"></a>
+  <img src="https://img.shields.io/badge/GLPI-11.0.8%E2%80%93%3C11.1.0-0b7285" alt="GLPI 11.0.8 to below 11.1.0">
+  <img src="https://img.shields.io/badge/PHP-%E2%89%A58.2-777bb4" alt="PHP 8.2 or newer">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-16a34a" alt="GPL-3.0-or-later"></a>
+  <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/actions/workflows/quality.yml"><img src="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/actions/workflows/quality.yml/badge.svg" alt="Quality"></a>
+</p>
+
+TicketOps is a GLPI 11 plugin for safe, previewed and controlled operations on existing tickets.
 
 > Faciliter la qualification, l’organisation et l’affectation des tickets GLPI sans contourner le modèle multi-entités.
 
@@ -8,7 +20,7 @@ Version `0.0.1` is the installable foundation. It installs profile rights, trans
 
 ## Security commitments
 
-Ticket Operations:
+TicketOps:
 
 - grants no new authorization to requesters;
 - never bypasses entity isolation;
@@ -34,3 +46,9 @@ The installable directory must be named exactly `ticketoperations`. See [install
 
 Screenshots will be added when the read-only diagnostic UI is introduced in `0.0.2`.
 
+## Project links
+
+- [Releases](https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases)
+- [Issues](https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/issues)
+- [Security policy](SECURITY.md)
+- [Changelog](CHANGELOG.md)

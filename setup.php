@@ -19,7 +19,22 @@ function plugin_ticketoperations_autoload(): void
     $autoload = __DIR__ . '/vendor/autoload.php';
     if (is_file($autoload)) {
         require_once $autoload;
+
+        return;
     }
+
+    // Keep a direct Git checkout installable even when Composer is only
+    // available on the development machine or in the release builder.
+    spl_autoload_register(static function (string $class): void {
+        $prefix = 'GlpiPlugin\\Ticketoperations\\';
+        if (!str_starts_with($class, $prefix)) {
+            return;
+        }
+        $path = __DIR__ . '/src/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
+        if (is_file($path)) {
+            require_once $path;
+        }
+    });
 }
 
 function plugin_init_ticketoperations(): void
@@ -42,11 +57,11 @@ function plugin_init_ticketoperations(): void
 function plugin_version_ticketoperations(): array
 {
     return [
-        'name' => __('Ticket Operations', 'ticketoperations'),
+        'name' => __('TicketOps', 'ticketoperations'),
         'version' => PLUGIN_TICKETOPERATIONS_VERSION,
         'author' => 'TiniSys IT Solutions',
         'license' => 'GPL-3.0-or-later',
-        'homepage' => 'https://github.com/TiniSys-IT-Solutions/glpi-ticket-operations',
+        'homepage' => 'https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops',
         'requirements' => [
             'glpi' => ['min' => PLUGIN_TICKETOPERATIONS_MIN_GLPI, 'max' => PLUGIN_TICKETOPERATIONS_MAX_GLPI],
             'php' => ['min' => PLUGIN_TICKETOPERATIONS_MIN_PHP],
