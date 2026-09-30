@@ -1,16 +1,361 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: TicketOps 0.0.1\n"
+"Project-Id-Version: TicketOps 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-30 18:02+0530\n"
+"PO-Revision-Date: 2026-09-30 18:02+0530\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
 "Language: en_GB\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: dist/build/ticketops/src/Service/RelationCompatibilityService.php:51
+#: src/Service/RelationCompatibilityService.php:51
+msgid "GLPI will evaluate native ONUPDATE ticket rules during execution."
+msgstr "GLPI will evaluate native ONUPDATE ticket rules during execution."
+
+#: dist/build/ticketops/src/Service/TicketOperationExecutor.php:26
+#: src/Service/TicketOperationExecutor.php:26
+msgid "The ticket is unavailable or you are not allowed to update it."
+msgstr "The ticket is unavailable or you are not allowed to update it."
+
+#: dist/build/ticketops/src/Service/TicketOperationExecutor.php:29
+#: src/Service/TicketOperationExecutor.php:29
+msgid "This plan contains blocking issues."
+msgstr "This plan contains blocking issues."
+
+#: dist/build/ticketops/src/Service/TicketOperationExecutor.php:33
+#: src/Service/TicketOperationExecutor.php:33
+msgid "The ticket changed after the preview. Create a new preview."
+msgstr "The ticket changed after the preview. Create a new preview."
+
+#: dist/build/ticketops/src/Service/TicketOperationExecutor.php:39
+#: src/Service/TicketOperationExecutor.php:39
+msgid "GLPI refused the ticket update."
+msgstr "GLPI refused the ticket update."
+
+#: dist/build/ticketops/src/Service/TicketOperationExecutor.php:47
+#: src/Service/TicketOperationExecutor.php:47
+msgid "The updated ticket could not be reloaded."
+msgstr "The updated ticket could not be reloaded."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:30
+#: src/Service/TicketOperationPlanner.php:30
+msgid "The requester correction is incomplete."
+msgstr "The requester correction is incomplete."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:39
+#: src/Service/TicketOperationPlanner.php:39
+msgid "The requester to replace no longer exists on this ticket."
+msgstr "The requester to replace no longer exists on this ticket."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:43
+#: src/Service/TicketOperationPlanner.php:43
+msgid "The selected requester is not usable in the target entity."
+msgstr "The selected requester is not usable in the target entity."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:47
+#: src/Service/TicketOperationPlanner.php:47
+msgid "The selected requester is already present on this ticket."
+msgstr "The selected requester is already present on this ticket."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:55
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:62
+#: src/Service/TicketOperationPlanner.php:55
+#: src/Service/TicketOperationPlanner.php:62
+msgid "An organization choice is not valid in the target entity."
+msgstr "An organization choice is not valid in the target entity."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:79
+#: src/Service/TicketOperationPlanner.php:79
+#, php-format
+msgid "The incompatible relation %s cannot be removed safely by TicketOps."
+msgstr "The incompatible relation %s cannot be removed safely by TicketOps."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:88
+#: src/Service/TicketOperationPlanner.php:88
+msgid ""
+"Every incompatible relation must be explicitly confirmed before removal."
+msgstr ""
+"Every incompatible relation must be explicitly confirmed before removal."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:104
+#: src/Service/TicketOperationPlanner.php:104
+msgid "GLPI will emit the final native ticket update notification."
+msgstr "GLPI will emit the final native ticket update notification."
+
+#: dist/build/ticketops/src/Service/TicketOperationPlanner.php:105
+#: src/Service/TicketOperationPlanner.php:105
+msgid ""
+"GLPI will evaluate its native ONUPDATE rules; TicketOps requests no "
+"additional replay."
+msgstr ""
+"GLPI will evaluate its native ONUPDATE rules; TicketOps requests no "
+"additional replay."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:25
+#: src/Service/TicketDiagnosticEvaluator.php:25
+msgid "The requester is represented only by an email address."
+msgstr "The requester is represented only by an email address."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:34
+#: src/Service/TicketDiagnosticEvaluator.php:34
+msgid "A requester account is inactive or deleted."
+msgstr "A requester account is inactive or deleted."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:36
+#: src/Service/TicketDiagnosticEvaluator.php:36
+msgid "A requester is not valid in the ticket entity."
+msgstr "A requester is not valid in the ticket entity."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:38
+#: src/Service/TicketDiagnosticEvaluator.php:38
+msgid "A requester can be used in several accessible entities."
+msgstr "A requester can be used in several accessible entities."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:42
+#: src/Service/TicketDiagnosticEvaluator.php:42
+msgid "No technical group is assigned."
+msgstr "No technical group is assigned."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:45
+#: src/Service/TicketDiagnosticEvaluator.php:45
+msgid "No technician is assigned."
+msgstr "No technician is assigned."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:48
+#: src/Service/TicketDiagnosticEvaluator.php:48
+msgid "No ITIL category is selected."
+msgstr "No ITIL category is selected."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:50
+#: src/Service/TicketDiagnosticEvaluator.php:50
+msgid "The email requester is not yet qualified by an ITIL category."
+msgstr "The email requester is not yet qualified by an ITIL category."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:54
+#: src/Service/TicketDiagnosticEvaluator.php:54
+msgid "No location is selected."
+msgstr "No location is selected."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:58
+#: src/Service/TicketDiagnosticEvaluator.php:58
+#, php-format
+msgid "Actor relation #%d is incompatible with the ticket entity."
+msgstr "Actor relation #%d is incompatible with the ticket entity."
+
+#: dist/build/ticketops/src/Service/TicketDiagnosticEvaluator.php:62
+#: src/Service/TicketDiagnosticEvaluator.php:62
+msgid "No organization inconsistency was detected."
+msgstr "No organization inconsistency was detected."
+
+#: dist/build/ticketops/src/Profile.php:31
+#: dist/build/ticketops/src/Profile.php:51 dist/build/ticketops/setup.php:72
+#: src/Profile.php:31 src/Profile.php:51 setup.php:72
 msgid "TicketOps"
 msgstr "TicketOps"
 
+#: dist/build/ticketops/src/Profile.php:68 src/Profile.php:68
 msgid "View ticket organization diagnostics"
 msgstr "View ticket organization diagnostics"
 
+#: dist/build/ticketops/src/Profile.php:69 src/Profile.php:69
 msgid "Correct a ticket requester and entity"
 msgstr "Correct a ticket requester and entity"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:53
+#: dist/build/ticketops/src/Ui/TicketPanel.php:114 src/Ui/TicketPanel.php:53
+#: src/Ui/TicketPanel.php:114
+msgid "Correct requester and entity"
+msgstr "Correct requester and entity"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:54 src/Ui/TicketPanel.php:54
+msgid "Requester to replace"
+msgstr "Requester to replace"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:55 src/Ui/TicketPanel.php:55
+msgid "Search an existing user"
+msgstr "Search an existing user"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:56 src/Ui/TicketPanel.php:56
+msgid "Close"
+msgstr "Close"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:57 src/Ui/TicketPanel.php:57
+msgid "Cancel"
+msgstr "Cancel"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:58 src/Ui/TicketPanel.php:58
+msgid "Preview"
+msgstr "Preview"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:59 src/Ui/TicketPanel.php:59
+msgid "Change requester and entity"
+msgstr "Change requester and entity"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:60 src/Ui/TicketPanel.php:60
+msgid "Searching…"
+msgstr "Searching…"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:61 src/Ui/TicketPanel.php:61
+msgid "No accessible user found."
+msgstr "No accessible user found."
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:62 src/Ui/TicketPanel.php:62
+msgid "Target entity"
+msgstr "Target entity"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:63 src/Ui/TicketPanel.php:63
+msgid "Choose explicitly"
+msgstr "Choose explicitly"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:64 src/Ui/TicketPanel.php:64
+msgid "Expected result"
+msgstr "Expected result"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:65 src/Ui/TicketPanel.php:65
+msgid "Remove incompatible relation"
+msgstr "Remove incompatible relation"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:66 src/Ui/TicketPanel.php:66
+msgid "Email address"
+msgstr "Email address"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:67 src/Ui/TicketPanel.php:67
+msgid ""
+"The target entity, requester and compatible relations shown above will be "
+"applied."
+msgstr ""
+"The target entity, requester and compatible relations shown above will be "
+"applied."
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:68
+#: dist/build/ticketops/src/Ui/TicketPanel.php:94 src/Ui/TicketPanel.php:68
+#: src/Ui/TicketPanel.php:94
+msgid "Current entity"
+msgstr "Current entity"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:69 src/Ui/TicketPanel.php:69
+msgid "Optional ticket organization"
+msgstr "Optional ticket organization"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:70
+#: dist/build/ticketops/src/Ui/TicketPanel.php:96 src/Ui/TicketPanel.php:70
+#: src/Ui/TicketPanel.php:96
+msgid "ITIL category"
+msgstr "ITIL category"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:71
+#: dist/build/ticketops/src/Ui/TicketPanel.php:97 src/Ui/TicketPanel.php:71
+#: src/Ui/TicketPanel.php:97
+msgid "Location"
+msgstr "Location"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:72 src/Ui/TicketPanel.php:72
+msgid "Technician group"
+msgstr "Technician group"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:73 src/Ui/TicketPanel.php:73
+msgid "Technician"
+msgstr "Technician"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:74 src/Ui/TicketPanel.php:74
+msgid "Keep current value"
+msgstr "Keep current value"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:75
+#: dist/build/ticketops/src/Ui/TicketPanel.php:117 src/Ui/TicketPanel.php:75
+#: src/Ui/TicketPanel.php:117
+msgid "Reorganize ticket"
+msgstr "Reorganize ticket"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:76 src/Ui/TicketPanel.php:76
+msgid "Reorganize ticket assignment"
+msgstr "Reorganize ticket assignment"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:77 src/Ui/TicketPanel.php:77
+msgid "Apply ticket organization"
+msgstr "Apply ticket organization"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:78
+#: dist/build/ticketops/src/Ui/TicketPanel.php:120 src/Ui/TicketPanel.php:78
+#: src/Ui/TicketPanel.php:120
+msgid "Assign to me and start"
+msgstr "Assign to me and start"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:84
+#: dist/build/ticketops/src/Ui/TicketPanel.php:86 src/Ui/TicketPanel.php:84
+#: src/Ui/TicketPanel.php:86
+msgid "Ticket organization"
+msgstr "Ticket organization"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:95 src/Ui/TicketPanel.php:95
+msgid "Source"
+msgstr "Source"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:98 src/Ui/TicketPanel.php:98
+msgid "Actors"
+msgstr "Actors"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:99 src/Ui/TicketPanel.php:99
+#, php-format
+msgid "%1$d requester(s), %2$d assignee(s), %3$d observer(s)"
+msgstr "%1$d requester(s), %2$d assignee(s), %3$d observer(s)"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:104 src/Ui/TicketPanel.php:104
+msgid "Last update"
+msgstr "Last update"
+
+#: dist/build/ticketops/src/Ui/TicketPanel.php:124 src/Ui/TicketPanel.php:124
+msgid ""
+"TicketOps never grants additional access and does not replay business rules."
+msgstr ""
+"TicketOps never grants additional access and does not replay business rules."
+
+#: dist/build/ticketops/src/Controller/PreviewOperationController.php:36
+#: dist/build/ticketops/src/Controller/SearchOrganizationOptionsController.php:32
+#: src/Controller/PreviewOperationController.php:36
+#: src/Controller/SearchOrganizationOptionsController.php:32
+msgid "Invalid operation parameters."
+msgstr "Invalid operation parameters."
+
+#: dist/build/ticketops/src/Controller/ExecuteOperationController.php:59
+#: src/Controller/ExecuteOperationController.php:59
+msgid "The submitted preview is obsolete."
+msgstr "The submitted preview is obsolete."
+
+#: dist/build/ticketops/front/config.php:18 front/config.php:18
+msgid "TicketOps settings saved."
+msgstr "TicketOps settings saved."
+
+#: dist/build/ticketops/front/config.php:23 front/config.php:23
+msgid "TicketOps settings"
+msgstr "TicketOps settings"
+
+#: dist/build/ticketops/front/config.php:25 front/config.php:25
+msgid "TicketOps modules"
+msgstr "TicketOps modules"
+
+#: dist/build/ticketops/front/config.php:28 front/config.php:28
+msgid "Ticket organization diagnostics"
+msgstr "Ticket organization diagnostics"
+
+#: dist/build/ticketops/front/config.php:29 front/config.php:29
+msgid "Requester and entity correction"
+msgstr "Requester and entity correction"
+
+#: dist/build/ticketops/front/config.php:30 front/config.php:30
+msgid "Ticket organization operation"
+msgstr "Ticket organization operation"
+
+#: dist/build/ticketops/front/config.php:31 front/config.php:31
+msgid "Quick assignment"
+msgstr "Quick assignment"

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GlpiPlugin\Ticketoperations;
+namespace GlpiPlugin\Ticketops;
 
 final class Plugin
 {
-    public const KEY = 'ticketoperations';
+    public const KEY = 'ticketops';
     public const NAME = 'TicketOps';
     public const SHORT_NAME = 'TicketOps';
-    public const VERSION = '0.0.1';
+    public const VERSION = '0.1.0';
 
     private function __construct() {}
 }

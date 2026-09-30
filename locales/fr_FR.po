@@ -1,16 +1,240 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: TicketOps 0.0.1\n"
+"Project-Id-Version: TicketOps 0.1.0\n"
 "Language: fr_FR\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"MIME-Version: 1.0\n"
+
+msgid "%s will be revalidated by GLPI for the target entity."
+msgstr "%s sera revalidé par GLPI pour l’entité cible."
+
+msgid "A requester account is inactive or deleted."
+msgstr "Un compte demandeur est inactif ou supprimé."
+
+msgid "A requester can be used in several accessible entities."
+msgstr "Un demandeur peut être utilisé dans plusieurs entités accessibles."
+
+msgid "A requester is not valid in the ticket entity."
+msgstr "Un demandeur n’est pas valide dans l’entité du ticket."
+
+msgid "Actor relation #%d is incompatible with the ticket entity."
+msgstr "La relation d’acteur n° %d est incompatible avec l’entité du ticket."
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Change requester and entity"
+msgstr "Changer le demandeur et l’entité"
+
+msgid "Choose explicitly"
+msgstr "Choisir explicitement"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Correct a ticket requester and entity"
+msgstr "Corriger le demandeur et l’entité d’un ticket"
+
+msgid "Correct requester and entity"
+msgstr "Corriger le demandeur et l’entité"
+
+msgid "Email address"
+msgstr "Adresse email"
+
+msgid ""
+"Every incompatible relation must be explicitly confirmed before removal."
+msgstr ""
+"Chaque relation incompatible doit être explicitement confirmée avant son "
+"retrait."
+
+msgid "Expected result"
+msgstr "Résultat attendu"
+
+msgid "GLPI refused the ticket update."
+msgstr "GLPI a refusé la mise à jour du ticket."
+
+msgid "GLPI will emit the final native ticket update notification."
+msgstr "GLPI émettra la notification native finale de mise à jour du ticket."
+
+msgid ""
+"GLPI will evaluate its native ONUPDATE rules; TicketOps requests no "
+"additional replay."
+msgstr ""
+"GLPI évaluera ses règles natives ONUPDATE ; TicketOps ne demande aucun rejeu "
+"supplémentaire."
+
+msgid "GLPI will evaluate native ONUPDATE ticket rules during execution."
+msgstr ""
+"GLPI évaluera les règles natives ONUPDATE du ticket pendant l’exécution."
+
+msgid "Invalid operation parameters."
+msgstr "Paramètres d’opération invalides."
+
+msgid "No ITIL category is selected."
+msgstr "Aucune catégorie ITIL n’est sélectionnée."
+
+msgid "No location is selected."
+msgstr "Aucun lieu n’est sélectionné."
+
+msgid "No accessible user found."
+msgstr "Aucun utilisateur accessible trouvé."
+
+msgid "No business-rule replay is requested by TicketOps."
+msgstr "TicketOps ne demande aucun rejeu des règles métier."
+
+msgid "No organization inconsistency was detected."
+msgstr "Aucune incohérence d’organisation n’a été détectée."
+
+msgid "No technical group is assigned."
+msgstr "Aucun groupe technique n’est affecté."
+
+msgid "No technician is assigned."
+msgstr "Aucun technicien n’est affecté."
+
+msgid "Preview"
+msgstr "Aperçu"
+
+msgid "Remove incompatible relation"
+msgstr "Retirer la relation incompatible"
+
+msgid "Requester and entity correction"
+msgstr "Correction du demandeur et de l’entité"
+
+msgid "Requester to replace"
+msgstr "Demandeur à remplacer"
+
+msgid "Search an existing user"
+msgstr "Rechercher un utilisateur existant"
+
+msgid "Searching…"
+msgstr "Recherche…"
+
+msgid "Target entity"
+msgstr "Entité cible"
+
+msgid "The email requester is not yet qualified by an ITIL category."
+msgstr "Le demandeur email n’est pas encore qualifié par une catégorie ITIL."
+
+msgid "The incompatible relation %s cannot be removed safely by TicketOps."
+msgstr ""
+"La relation incompatible %s ne peut pas être retirée de manière sûre par "
+"TicketOps."
+
+msgid "The requester is represented only by an email address."
+msgstr "Le demandeur est représenté uniquement par une adresse email."
+
+msgid "The requester to replace no longer exists on this ticket."
+msgstr "Le demandeur à remplacer n’existe plus sur ce ticket."
+
+msgid "The selected requester is already present on this ticket."
+msgstr "Le demandeur sélectionné est déjà présent sur ce ticket."
+
+msgid "The selected requester is not usable in the target entity."
+msgstr "Le demandeur sélectionné n’est pas utilisable dans l’entité cible."
+
+msgid "The submitted preview is obsolete."
+msgstr "L’aperçu transmis est obsolète."
+
+msgid ""
+"The target entity, requester and compatible relations shown above will be "
+"applied."
+msgstr ""
+"L’entité cible, le demandeur et les relations compatibles affichés ci-dessus "
+"seront appliqués."
+
+msgid "The ticket changed after the preview. Create a new preview."
+msgstr "Le ticket a changé après l’aperçu. Créez un nouvel aperçu."
+
+msgid "The ticket is unavailable or you are not allowed to update it."
+msgstr "Le ticket est indisponible ou vous n’êtes pas autorisé à le modifier."
+
+msgid "The updated ticket could not be reloaded."
+msgstr "Le ticket mis à jour n’a pas pu être rechargé."
+
+msgid "This plan contains blocking issues."
+msgstr "Ce plan contient des blocages."
+
+msgid "Ticket organization"
+msgstr "Organisation du ticket"
+
+msgid "Ticket organization diagnostics"
+msgstr "Diagnostic d’organisation des tickets"
 
 msgid "TicketOps"
 msgstr "TicketOps"
 
+msgid "TicketOps modules"
+msgstr "Modules TicketOps"
+
+msgid ""
+"TicketOps never grants additional access and does not replay business rules."
+msgstr ""
+"TicketOps n’accorde aucun accès supplémentaire et ne rejoue pas les règles "
+"métier."
+
+msgid "TicketOps settings"
+msgstr "Paramètres de TicketOps"
+
+msgid "TicketOps settings saved."
+msgstr "Paramètres de TicketOps enregistrés."
+
 msgid "View ticket organization diagnostics"
 msgstr "Voir le diagnostic d’organisation des tickets"
 
-msgid "Correct a ticket requester and entity"
-msgstr "Corriger le demandeur et l’entité d’un ticket"
+msgid "An organization choice is not valid in the target entity."
+msgstr "Un choix d’organisation n’est pas valide dans l’entité cible."
+
+msgid "Current entity"
+msgstr "Entité actuelle"
+
+msgid "Optional ticket organization"
+msgstr "Organisation facultative du ticket"
+
+msgid "ITIL category"
+msgstr "Catégorie ITIL"
+
+msgid "Location"
+msgstr "Lieu"
+
+msgid "Technician group"
+msgstr "Groupe de techniciens"
+
+msgid "Technician"
+msgstr "Technicien"
+
+msgid "Keep current value"
+msgstr "Conserver la valeur actuelle"
+
+msgid "Ticket organization operation"
+msgstr "Réorganisation du ticket"
+
+msgid "Quick assignment"
+msgstr "Affectation rapide"
+
+msgid "The requester correction is incomplete."
+msgstr "La correction du demandeur est incomplète."
+
+msgid "Reorganize ticket"
+msgstr "Réorganiser le ticket"
+
+msgid "Reorganize ticket assignment"
+msgstr "Réorganiser l’affectation du ticket"
+
+msgid "Apply ticket organization"
+msgstr "Appliquer l’organisation du ticket"
+
+msgid "Assign to me and start"
+msgstr "Me l’affecter et démarrer"
+
+msgid "Source"
+msgstr "Source"
+
+msgid "Actors"
+msgstr "Acteurs"
+
+msgid "%1$d requester(s), %2$d assignee(s), %3$d observer(s)"
+msgstr "%1$d demandeur(s), %2$d attribué(s), %3$d observateur(s)"
+
+msgid "Last update"
+msgstr "Dernière modification"

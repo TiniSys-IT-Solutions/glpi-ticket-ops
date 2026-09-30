@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GlpiPlugin\Ticketoperations\Install;
+namespace GlpiPlugin\Ticketops\Install;
 
 final class RightSet
 {

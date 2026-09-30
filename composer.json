@@ -1,5 +1,5 @@
 {
-  "name": "tinisys-it-solutions/glpi-ticket-operations",
+  "name": "tinisys-it-solutions/glpi-ticket-ops",
   "description": "Safe, previewed and controlled ticket operations for GLPI 11.",
   "type": "glpi-plugin",
   "license": "GPL-3.0-or-later",
@@ -11,9 +11,9 @@
     "phpstan/phpstan": "^2.1",
     "phpunit/phpunit": "^11.0"
   },
-  "autoload": {"psr-4": {"GlpiPlugin\\Ticketoperations\\": "src/"}},
+  "autoload": {"psr-4": {"GlpiPlugin\\Ticketops\\": "src/"}},
   "autoload-dev": {
-    "psr-4": {"GlpiPlugin\\Ticketoperations\\Tests\\Unit\\": "tests/Unit/"},
+    "psr-4": {"GlpiPlugin\\Ticketops\\Tests\\Unit\\": "tests/Unit/"},
     "exclude-from-classmap": ["tests/StaticAnalysis/"]
   },
   "scripts": {

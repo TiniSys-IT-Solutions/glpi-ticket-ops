@@ -1,0 +1,222 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TicketOps 0.1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+
+msgid "%s will be revalidated by GLPI for the target entity."
+msgstr ""
+
+msgid "A requester account is inactive or deleted."
+msgstr ""
+
+msgid "A requester can be used in several accessible entities."
+msgstr ""
+
+msgid "A requester is not valid in the ticket entity."
+msgstr ""
+
+msgid "Actor relation #%d is incompatible with the ticket entity."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Change requester and entity"
+msgstr ""
+
+msgid "Choose explicitly"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Correct a ticket requester and entity"
+msgstr ""
+
+msgid "Correct requester and entity"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Every incompatible relation must be explicitly confirmed before removal."
+msgstr ""
+
+msgid "Expected result"
+msgstr ""
+
+msgid "GLPI refused the ticket update."
+msgstr ""
+
+msgid "GLPI will emit the final native ticket update notification."
+msgstr ""
+
+msgid "GLPI will evaluate its native ONUPDATE rules; TicketOps requests no additional replay."
+msgstr ""
+
+msgid "GLPI will evaluate native ONUPDATE ticket rules during execution."
+msgstr ""
+
+msgid "Invalid operation parameters."
+msgstr ""
+
+msgid "No ITIL category is selected."
+msgstr ""
+
+msgid "No location is selected."
+msgstr ""
+
+msgid "No accessible user found."
+msgstr ""
+
+msgid "No business-rule replay is requested by TicketOps."
+msgstr ""
+
+msgid "No organization inconsistency was detected."
+msgstr ""
+
+msgid "No technical group is assigned."
+msgstr ""
+
+msgid "No technician is assigned."
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Remove incompatible relation"
+msgstr ""
+
+msgid "Requester and entity correction"
+msgstr ""
+
+msgid "Requester to replace"
+msgstr ""
+
+msgid "Search an existing user"
+msgstr ""
+
+msgid "Searching…"
+msgstr ""
+
+msgid "Target entity"
+msgstr ""
+
+msgid "The email requester is not yet qualified by an ITIL category."
+msgstr ""
+
+msgid "The incompatible relation %s cannot be removed safely by TicketOps."
+msgstr ""
+
+msgid "The requester is represented only by an email address."
+msgstr ""
+
+msgid "The requester to replace no longer exists on this ticket."
+msgstr ""
+
+msgid "The selected requester is already present on this ticket."
+msgstr ""
+
+msgid "The selected requester is not usable in the target entity."
+msgstr ""
+
+msgid "The submitted preview is obsolete."
+msgstr ""
+
+msgid "The target entity, requester and compatible relations shown above will be applied."
+msgstr ""
+
+msgid "The ticket changed after the preview. Create a new preview."
+msgstr ""
+
+msgid "The ticket is unavailable or you are not allowed to update it."
+msgstr ""
+
+msgid "The updated ticket could not be reloaded."
+msgstr ""
+
+msgid "This plan contains blocking issues."
+msgstr ""
+
+msgid "Ticket organization"
+msgstr ""
+
+msgid "Ticket organization diagnostics"
+msgstr ""
+
+msgid "TicketOps"
+msgstr ""
+
+msgid "TicketOps modules"
+msgstr ""
+
+msgid "TicketOps never grants additional access and does not replay business rules."
+msgstr ""
+
+msgid "TicketOps settings"
+msgstr ""
+
+msgid "TicketOps settings saved."
+msgstr ""
+
+msgid "View ticket organization diagnostics"
+msgstr ""
+
+msgid "An organization choice is not valid in the target entity."
+msgstr ""
+
+msgid "Current entity"
+msgstr ""
+
+msgid "Optional ticket organization"
+msgstr ""
+
+msgid "ITIL category"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Technician group"
+msgstr ""
+
+msgid "Technician"
+msgstr ""
+
+msgid "Keep current value"
+msgstr ""
+
+msgid "Ticket organization operation"
+msgstr ""
+
+msgid "Quick assignment"
+msgstr ""
+
+msgid "The requester correction is incomplete."
+msgstr ""
+
+msgid "Reorganize ticket"
+msgstr ""
+
+msgid "Reorganize ticket assignment"
+msgstr ""
+
+msgid "Apply ticket organization"
+msgstr ""
+
+msgid "Assign to me and start"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Actors"
+msgstr ""
+
+msgid "%1$d requester(s), %2$d assignee(s), %3$d observer(s)"
+msgstr ""
+
+msgid "Last update"
+msgstr ""

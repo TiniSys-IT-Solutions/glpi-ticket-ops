@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
     <name>TicketOps</name>
-    <key>ticketoperations</key>
+    <key>ticketops</key>
     <state>development</state>
     <description>
         <short>Safe, auditable ticket operations for GLPI.</short>
@@ -15,7 +15,7 @@
     </authors>
     <versions>
         <version>
-            <num>0.0.1</num>
+            <num>0.1.0</num>
             <compatibility>11.0.8 &lt;= GLPI &lt; 11.1.0</compatibility>
         </version>
     </versions>

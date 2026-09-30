@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GlpiPlugin\Ticketoperations;
+namespace GlpiPlugin\Ticketops;
 
 use CommonGLPI;
 use Session;
 
 final class Profile extends \Profile
 {
-    public const RIGHT_DIAGNOSTIC = 'plugin_ticketoperations_diagnostic';
-    public const RIGHT_REQUESTER_ENTITY_SWITCH = 'plugin_ticketoperations_requester_entity_switch';
+    public const RIGHT_DIAGNOSTIC = 'plugin_ticketops_diagnostic';
+    public const RIGHT_REQUESTER_ENTITY_SWITCH = 'plugin_ticketops_requester_entity_switch';
 
     public static function canViewDiagnostic(): bool
     {
@@ -28,7 +28,7 @@ final class Profile extends \Profile
         return $item instanceof \Profile
             && $item->getID() > 0
             && ($item->fields['interface'] ?? '') === 'central'
-            ? self::createTabEntry(__('TicketOps', 'ticketoperations'), 0, $item::getType(), 'ti ti-ticket')
+            ? self::createTabEntry(__('TicketOps', 'ticketops'), 0, $item::getType(), 'ti ti-ticket')
             : '';
     }
 
@@ -48,7 +48,7 @@ final class Profile extends \Profile
         }
         $item->displayRightsChoiceMatrix(self::rights(), [
             'canedit' => $canEdit,
-            'title' => __('TicketOps', 'ticketoperations'),
+            'title' => __('TicketOps', 'ticketops'),
         ]);
         if ($canEdit) {
             echo "<div class='center'>";
@@ -65,8 +65,8 @@ final class Profile extends \Profile
     public static function rights(): array
     {
         return [
-            self::right(__('View ticket organization diagnostics', 'ticketoperations'), self::RIGHT_DIAGNOSTIC, READ, __('Read')),
-            self::right(__('Correct a ticket requester and entity', 'ticketoperations'), self::RIGHT_REQUESTER_ENTITY_SWITCH, UPDATE, __('Update')),
+            self::right(__('View ticket organization diagnostics', 'ticketops'), self::RIGHT_DIAGNOSTIC, READ, __('Read')),
+            self::right(__('Correct a ticket requester and entity', 'ticketops'), self::RIGHT_REQUESTER_ENTITY_SWITCH, UPDATE, __('Update')),
         ];
     }
 
