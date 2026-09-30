@@ -1,0 +1,28 @@
+{
+  "name": "tinisys-it-solutions/glpi-ticket-operations",
+  "description": "Safe, previewed and controlled ticket operations for GLPI 11.",
+  "type": "glpi-plugin",
+  "license": "GPL-3.0-or-later",
+  "authors": [{"name": "TiniSys IT Solutions"}],
+  "require": {"php": ">=8.2"},
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.80",
+    "glpi-project/tools": "^0.8",
+    "phpstan/phpstan": "^2.1",
+    "phpunit/phpunit": "^11.0"
+  },
+  "autoload": {"psr-4": {"GlpiPlugin\\Ticketoperations\\": "src/"}},
+  "autoload-dev": {
+    "psr-4": {"GlpiPlugin\\Ticketoperations\\Tests\\Unit\\": "tests/Unit/"},
+    "exclude-from-classmap": ["tests/StaticAnalysis/"]
+  },
+  "scripts": {
+    "lint": "find . -path ./vendor -prune -o -path ./dist -prune -o -path ./.local -prune -o -path ./.phpunit.cache -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l",
+    "test": "phpunit",
+    "test:js": "node --test tests/JavaScript/*.cjs",
+    "analyse": "phpstan analyse --no-progress",
+    "cs:check": "php-cs-fixer check --diff",
+    "quality": ["@lint", "@test", "@test:js", "@analyse", "@cs:check"]
+  },
+  "config": {"optimize-autoloader": true, "sort-packages": true}
+}

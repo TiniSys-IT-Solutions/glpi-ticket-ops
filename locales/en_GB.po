@@ -1,0 +1,17 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Ticket Operations 0.0.1\n"
+"Language: en_GB\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+
+msgid "Ticket Operations"
+msgstr "Ticket Operations"
+
+msgid "View ticket organization diagnostics"
+msgstr "View ticket organization diagnostics"
+
+msgid "Correct a ticket requester and entity"
+msgstr "Correct a ticket requester and entity"
+

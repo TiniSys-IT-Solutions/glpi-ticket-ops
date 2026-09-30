@@ -1,0 +1,5 @@
+/* TicketOps 0.0.1 reserves a stable plugin scope without altering GLPI layouts. */
+.plugin-ticketoperations {
+  box-sizing: border-box;
+}
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <name>Ticket Operations</name>
+    <key>ticketoperations</key>
+    <state>development</state>
+    <description>
+        <short>Safe, auditable ticket operations for GLPI.</short>
+        <long>Ticket Operations provides controlled tools for diagnosing and operating on GLPI tickets.</long>
+    </description>
+    <homepage>https://github.com/TiniSys-IT-Solutions/glpi-ticket-operations</homepage>
+    <download>https://github.com/TiniSys-IT-Solutions/glpi-ticket-operations/releases</download>
+    <issues>https://github.com/TiniSys-IT-Solutions/glpi-ticket-operations/issues</issues>
+    <authors>
+        <author>TiniSys IT Solutions</author>
+    </authors>
+    <versions>
+        <version>
+            <num>0.0.1</num>
+            <compatibility>11.0.8 &lt;= GLPI &lt; 11.1.0</compatibility>
+        </version>
+    </versions>
+    <langs>
+        <lang>en_GB</lang>
+        <lang>fr_FR</lang>
+    </langs>
+    <license>GPLv3+</license>
+</root>
