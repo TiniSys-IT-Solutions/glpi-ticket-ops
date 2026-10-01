@@ -10,6 +10,7 @@ use Glpi\Exception\Http\BadRequestHttpException;
 use Glpi\Http\Firewall;
 use Glpi\Security\Attribute\SecurityStrategy;
 use GlpiPlugin\Ticketops\Config;
+use GlpiPlugin\Ticketops\Security\PreviewTokenStore;
 use GlpiPlugin\Ticketops\Security\TicketOperationGuard;
 use GlpiPlugin\Ticketops\Service\TicketOperationExecutor;
 use GlpiPlugin\Ticketops\Service\TicketOperationPlanner;
@@ -55,7 +56,8 @@ final class ExecuteOperationController extends AbstractController
             $remove,
             $organization,
         );
-        if (!hash_equals($plan->fingerprint, $request->request->getString('fingerprint'))) {
+        if (!hash_equals($plan->fingerprint, $request->request->getString('fingerprint'))
+            || !(new PreviewTokenStore())->consume($request->request->getString('preview_token'), $plan, Session::getLoginUserID())) {
             throw new BadRequestHttpException(__('The submitted preview is obsolete.', 'ticketops'));
         }
         try {
@@ -71,7 +73,7 @@ final class ExecuteOperationController extends AbstractController
     private function organizationChanges(Request $request): array
     {
         $changes = [];
-        foreach (['category', 'location', 'group', 'technician', 'status'] as $kind) {
+        foreach (['category', 'location', 'technician', 'observer', 'status'] as $kind) {
             $value = $request->request->getInt($kind . '_id');
             if ($value > 0) {
                 $changes[$kind] = $value;

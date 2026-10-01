@@ -39,6 +39,7 @@ final class TicketPanel
             static fn(int $id): array => ['id' => $id, 'name' => \Dropdown::getDropdownName('glpi_entities', $id)],
             array_values(array_unique(array_map('intval', Session::getActiveEntities()))),
         );
+        $canOperate = Config::operationsEnabled() && $guard->canOperate($ticket);
         $payload = htmlspecialchars((string) json_encode([
             'ticketId' => $snapshot->id,
             'ticketTitle' => $snapshot->title,
@@ -46,17 +47,24 @@ final class TicketPanel
             'requesters' => $snapshot->requesters,
             'operatorEntities' => $operatorEntities,
             'currentUser' => ['id' => Session::getLoginUserID(), 'name' => getUserName(Session::getLoginUserID())],
+            'canOperate' => $canOperate,
+            'modules' => [
+                'requester' => Config::enabled('requester_entity_switch'),
+                'organization' => Config::enabled('organization'),
+                'quick' => Config::enabled('quick_assignment'),
+            ],
             'csrfToken' => Session::getNewCSRFToken(),
             'baseUrl' => rtrim((string) ($CFG_GLPI['root_doc'] ?? ''), '/') . '/plugins/ticketops/TicketOps',
-            'organizationUrl' => rtrim((string) ($CFG_GLPI['root_doc'] ?? ''), '/') . '/plugins/ticketops/TicketOps/Ticket/' . $snapshot->id . '/OrganizationOptions',
+            'nativeFieldsUrl' => rtrim((string) ($CFG_GLPI['root_doc'] ?? ''), '/') . '/plugins/ticketops/TicketOps/Ticket/' . $snapshot->id . '/NativeFields',
             'labels' => [
-                'title' => __('Correct requester and entity', 'ticketops'),
+                'title' => __('Reorganize ticket', 'ticketops'),
+                'requester_section' => __('Optional requester correction', 'ticketops'),
                 'requester' => __('Requester to replace', 'ticketops'),
                 'search' => __('Search an existing user', 'ticketops'),
                 'close' => __('Close', 'ticketops'),
                 'cancel' => __('Cancel', 'ticketops'),
                 'preview' => __('Preview', 'ticketops'),
-                'execute' => __('Change requester and entity', 'ticketops'),
+                'execute' => __('Apply ticket organization', 'ticketops'),
                 'searching' => __('Searching…', 'ticketops'),
                 'not_found' => __('No accessible user found.', 'ticketops'),
                 'target_entity' => __('Target entity', 'ticketops'),
@@ -64,20 +72,38 @@ final class TicketPanel
                 'expected' => __('Expected result', 'ticketops'),
                 'remove' => __('Remove incompatible relation', 'ticketops'),
                 'email' => __('Email address', 'ticketops'),
-                'summary' => __('The target entity, requester and compatible relations shown above will be applied.', 'ticketops'),
+                'summary' => __('The target entity, optional requester and compatible organization shown above will be applied.', 'ticketops'),
                 'current_entity' => __('Current entity', 'ticketops'),
                 'optional_organization' => __('Optional ticket organization', 'ticketops'),
                 'category' => __('ITIL category', 'ticketops'),
                 'location' => __('Location', 'ticketops'),
-                'group' => __('Technician group', 'ticketops'),
                 'technician' => __('Technician', 'ticketops'),
+                'observer' => __('Observer', 'ticketops'),
+                'status' => __('Status', 'ticketops'),
                 'keep' => __('Keep current value', 'ticketops'),
                 'organize' => __('Reorganize ticket', 'ticketops'),
                 'organize_title' => __('Reorganize ticket assignment', 'ticketops'),
                 'apply' => __('Apply ticket organization', 'ticketops'),
                 'assign_me' => __('Assign to me and start', 'ticketops'),
+                'no_requester_change' => __('No requester change', 'ticketops'),
             ],
         ], JSON_THROW_ON_ERROR), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+
+        if (!empty($params['ticketops_tab'])) {
+            echo '<div class="card plugin-ticketops ticketops-tab" data-ticketops="' . $payload . '"'
+                . ' data-ticketops-health="' . self::escape($healthLevel) . '" data-ticketops-count="' . $issueCount . '">';
+            echo '<div class="card-header"><h3 class="card-title"><i class="ti ti-heartbeat me-2"></i>' . self::escape(__('TicketOps', 'ticketops')) . '</h3>';
+            if ($issueCount > 0) {
+                echo '<span class="badge bg-secondary text-secondary-fg ms-2">' . $issueCount . '</span>';
+            }
+            echo '</div><div class="card-body"><h4>' . self::escape(__('Ticket organization', 'ticketops')) . '</h4>';
+            self::renderSummary($ticket, $snapshot);
+            self::renderFindings($findings);
+            self::renderAction($canOperate);
+            echo '</div></div>';
+
+            return;
+        }
 
         echo '<section id="' . self::escape($sectionId) . '" class="plugin-ticketops accordion-item" data-ticketops="' . $payload . '"'
             . ' data-ticketops-health="' . self::escape($healthLevel) . '" data-ticketops-count="' . $issueCount . '">';
@@ -90,6 +116,20 @@ final class TicketPanel
         echo '</button></div>';
         echo '<div id="ticketops-body-' . $snapshot->id . '" class="accordion-collapse collapse" aria-labelledby="ticketops-heading-' . $snapshot->id . '">';
         echo '<div class="accordion-body row m-0 mt-n2"><div class="col-12 pt-3">';
+        self::renderFindings($findings);
+        self::renderAction($canOperate);
+        echo '</div></div></div></section>';
+    }
+
+    public static function renderTab(Ticket $ticket): bool
+    {
+        self::render(['item' => $ticket, 'ticketops_tab' => true]);
+
+        return true;
+    }
+
+    private static function renderSummary(Ticket $ticket, \GlpiPlugin\Ticketops\Domain\TicketSnapshot $snapshot): void
+    {
         echo '<dl class="ticketops-summary row mb-3">';
         self::summaryRow(__('Current entity', 'ticketops'), \Dropdown::getDropdownName('glpi_entities', $snapshot->entityId));
         self::summaryRow(__('Source', 'ticketops'), self::dropdownValue('glpi_requesttypes', (int) ($ticket->fields['requesttypes_id'] ?? 0)));
@@ -103,26 +143,24 @@ final class TicketPanel
         ));
         self::summaryRow(__('Last update', 'ticketops'), $snapshot->dateModified);
         echo '</dl>';
+    }
+
+    /** @param list<DiagnosticFinding> $findings */
+    private static function renderFindings(array $findings): void
+    {
         echo '<ul class="ticketops-findings">';
         foreach ($findings as $finding) {
             echo '<li class="ticketops-finding ticketops-' . self::escape($finding->level) . '"><span aria-hidden="true">' . self::icon($finding->level) . '</span> ' . self::escape($finding->message) . '</li>';
         }
         echo '</ul>';
-        if (Config::operationsEnabled() && $guard->canOperate($ticket)) {
-            echo '<div class="d-flex flex-wrap gap-2">';
-            if (Config::enabled('requester_entity_switch')) {
-                echo '<button type="button" class="btn btn-primary ticketops-open" data-ticketops-mode="requester">' . self::escape(__('Correct requester and entity', 'ticketops')) . '</button>';
-            }
-            if (Config::enabled('organization')) {
-                echo '<button type="button" class="btn btn-outline-primary ticketops-open" data-ticketops-mode="organization"><i class="ti ti-adjustments me-1"></i>' . self::escape(__('Reorganize ticket', 'ticketops')) . '</button>';
-            }
-            if (Config::enabled('quick_assignment')) {
-                echo '<button type="button" class="btn btn-outline-secondary ticketops-open" data-ticketops-mode="quick"><i class="ti ti-user-check me-1"></i>' . self::escape(__('Assign to me and start', 'ticketops')) . '</button>';
-            }
-            echo '</div>';
+    }
+
+    private static function renderAction(bool $canOperate): void
+    {
+        if ($canOperate) {
+            echo '<button type="button" class="btn btn-primary ticketops-open" data-ticketops-mode="unified"><i class="ti ti-adjustments me-1"></i>' . self::escape(__('Reorganize ticket', 'ticketops')) . '</button>';
         }
         echo '<p class="text-muted ticketops-fallback">' . self::escape(__('TicketOps never grants additional access and does not replay business rules.', 'ticketops')) . '</p>';
-        echo '</div></div></div></section>';
     }
 
     /** @param list<DiagnosticFinding> $findings */

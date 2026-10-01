@@ -10,6 +10,7 @@ use Glpi\Exception\Http\BadRequestHttpException;
 use Glpi\Http\Firewall;
 use Glpi\Security\Attribute\SecurityStrategy;
 use GlpiPlugin\Ticketops\Config;
+use GlpiPlugin\Ticketops\Security\PreviewTokenStore;
 use GlpiPlugin\Ticketops\Security\TicketOperationGuard;
 use GlpiPlugin\Ticketops\Service\TicketOperationPlanner;
 use Session;
@@ -51,14 +52,18 @@ final class PreviewOperationController extends AbstractController
             throw new AccessDeniedHttpException();
         }
 
-        return new JsonResponse((new TicketOperationPlanner())->build($ticket, $actorId, $userId, $entityId, $remove, $organization)->toArray());
+        $plan = (new TicketOperationPlanner())->build($ticket, $actorId, $userId, $entityId, $remove, $organization);
+        $response = $plan->toArray();
+        $response['previewToken'] = (new PreviewTokenStore())->issue($plan, Session::getLoginUserID());
+
+        return new JsonResponse($response);
     }
 
     /** @return array<string, int> */
     private function organizationChanges(Request $request): array
     {
         $changes = [];
-        foreach (['category', 'location', 'group', 'technician', 'status'] as $kind) {
+        foreach (['category', 'location', 'technician', 'observer', 'status'] as $kind) {
             $value = $request->request->getInt($kind . '_id');
             if ($value > 0) {
                 $changes[$kind] = $value;

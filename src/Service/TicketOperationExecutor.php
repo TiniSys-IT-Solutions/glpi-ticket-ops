@@ -87,7 +87,6 @@ final class TicketOperationExecutor
                     $isConfirmedRemoval = $this->isConfirmedActorRemoval($actor, $plan->incompatibilities, $removed);
                     $desiredAssignment = $type === 2 ? match ($itemtype) {
                         'User' => $plan->organizationChanges['technician'] ?? null,
-                        'Group' => $plan->organizationChanges['group'] ?? null,
                         default => null,
                     } : null;
                     $isReassigned = $desiredAssignment !== null && (int) $actor['items_id'] !== (int) $desiredAssignment;
@@ -110,15 +109,17 @@ final class TicketOperationExecutor
             $input = $this->appendNotificationValue($input, '_users_id_requester_notif', 'use_notification', 1);
             $input = $this->appendNotificationValue($input, '_users_id_requester_notif', 'alternative_email', '');
         }
-        if (isset($plan->organizationChanges['group'])
-            && !in_array($plan->organizationChanges['group'], $input['_groups_id_assign'], true)) {
-            $input = $this->appendListValue($input, '_groups_id_assign', $plan->organizationChanges['group']);
-        }
         if (isset($plan->organizationChanges['technician'])
             && !in_array($plan->organizationChanges['technician'], $input['_users_id_assign'], true)) {
             $input = $this->appendListValue($input, '_users_id_assign', $plan->organizationChanges['technician']);
             $input = $this->appendNotificationValue($input, '_users_id_assign_notif', 'use_notification', 1);
             $input = $this->appendNotificationValue($input, '_users_id_assign_notif', 'alternative_email', '');
+        }
+        if (isset($plan->organizationChanges['observer'])
+            && !in_array($plan->organizationChanges['observer'], $input['_users_id_observer'], true)) {
+            $input = $this->appendListValue($input, '_users_id_observer', $plan->organizationChanges['observer']);
+            $input = $this->appendNotificationValue($input, '_users_id_observer_notif', 'use_notification', 1);
+            $input = $this->appendNotificationValue($input, '_users_id_observer_notif', 'alternative_email', '');
         }
 
         return $input;

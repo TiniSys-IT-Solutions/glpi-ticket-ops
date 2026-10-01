@@ -1,5 +1,68 @@
 # Changelog
 
+## 0.1.7 - 2026-10-01
+
+### Changed
+
+- remove the informational finding for requesters valid in several entities;
+- keep multi-entity choice visible only where it is actionable, in the target-entity selector;
+- align workflow and security documentation with the final native GLPI selectors.
+
+### Security
+
+- remove obsolete JSON search endpoints and server-side group-replacement inputs;
+- retain requester/entity intersection checks in resolution, preview and execution;
+- bind execution to the exact previewed plan with a short-lived, one-use server-side token;
+- clean translation catalogs and prevent release-build paths from entering source references.
+
+## 0.1.6 - 2026-10-01
+
+### Fixed
+
+- list every active requester eligible in the operator's accessible entities instead of only the current user;
+- reload the target-entity selector with the exact requester/operator entity intersection;
+- submit the current requester as a replacement only when a new requester is actually selected.
+
+## 0.1.5 - 2026-10-01
+
+### Changed
+
+- show a single requester as a fixed value and reserve the selector for tickets with several requesters;
+- remove the technician-group choice and its health warning;
+- add an optional GLPI-native observer selector that preserves existing observers.
+
+## 0.1.4 - 2026-10-01
+
+### Fixed
+
+- use GLPI's native AJAX entity selector and hierarchical result presentation;
+- constrain Select2 result panels to their field instead of the full viewport;
+- mount the TicketOps health indicator when GLPI injects the ticket header dynamically.
+
+## 0.1.3 - 2026-10-01
+
+### Changed
+
+- place target-entity selection first in the unified dialog because every following choice depends on its scope;
+- present optional requester correction after the target entity, followed by organization and assignment choices.
+
+## 0.1.2 - 2026-10-01
+
+### Changed
+
+- render requester, category, location, technician group and technician choices with GLPI native AJAX dropdowns;
+- reload organization fields through GLPI for every explicitly selected target entity;
+- place the TicketOps health indicator directly beside the ticket title, with a compact mobile presentation.
+
+## 0.1.1 - 2026-10-01
+
+### Changed
+
+- add a native TicketOps tab to the ticket sidebar for the complete organization summary, findings and action;
+- keep the ticket information accordion compact with findings and one “Reorganize ticket” action;
+- open the unified reorganization dialogue directly from the ticket health indicator;
+- make requester correction and quick self-assignment optional choices inside the same immutable preview workflow.
+
 ## 0.1.0 - 2026-09-30
 
 ### Added

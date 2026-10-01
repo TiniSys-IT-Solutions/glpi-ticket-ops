@@ -34,12 +34,7 @@ final class TicketDiagnosticEvaluator
                 $findings[] = new DiagnosticFinding('inactive_requester', DiagnosticFinding::BLOCKING, __('A requester account is inactive or deleted.', 'ticketops'));
             } elseif (!in_array($ticket->entityId, $validEntities, true)) {
                 $findings[] = new DiagnosticFinding('invalid_requester_entity', DiagnosticFinding::BLOCKING, __('A requester is not valid in the ticket entity.', 'ticketops'));
-            } elseif (count($validEntities) > 1) {
-                $findings[] = new DiagnosticFinding('multiple_requester_entities', DiagnosticFinding::INFORMATION, __('A requester can be used in several accessible entities.', 'ticketops'));
             }
-        }
-        if ($ticket->assignedGroupCount === 0) {
-            $findings[] = new DiagnosticFinding('missing_group', DiagnosticFinding::WARNING, __('No technical group is assigned.', 'ticketops'));
         }
         if ($ticket->assignedUserCount === 0 && $ticket->assignedSupplierCount === 0) {
             $findings[] = new DiagnosticFinding('missing_technician', DiagnosticFinding::WARNING, __('No technician is assigned.', 'ticketops'));

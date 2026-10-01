@@ -57,7 +57,7 @@ final class TicketOperationPlanner
                 }
                 continue;
             }
-            if (!in_array($kind, ['category', 'location', 'group', 'technician'], true)
+            if (!in_array($kind, ['category', 'location', 'technician', 'observer'], true)
                 || !$organizationOptions->isValid($kind, (int) $id, $targetEntityId)) {
                 $blockers[] = __('An organization choice is not valid in the target entity.', 'ticketops');
                 unset($organizationChanges[$kind]);

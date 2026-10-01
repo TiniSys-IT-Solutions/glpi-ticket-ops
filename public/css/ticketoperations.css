@@ -11,4 +11,6 @@
 .ticketops-health-shortcut { align-items: center; cursor: pointer; display: inline-flex; gap: .3rem; }
 .ticketops-health-count { border-left: 1px solid currentcolor; margin-left: .1rem; padding-left: .35rem; }
 .ticketops-focus { outline: 2px solid var(--tblr-primary); outline-offset: -2px; transition: outline-color .2s ease; }
-.ticketops-modal .select2-container { width: 100% !important; }
+.ticketops-modal select + .select2-container { max-width: 100%; width: 100% !important; }
+.ticketops-modal .select2-dropdown { max-width: min(100vw, 100%); }
+@media (max-width: 767.98px) { .ticketops-health-label { display: none; } }
