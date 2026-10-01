@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.8 - 2026-10-01
+
+### Changed
+
+- mark requester, target entity, category, location and technician controls with the colour of their most severe diagnostic;
+- reuse the Ticket organization severity bar inside the reorganization dialog so vigilance points are immediately visible.
+
 ## 0.1.7 - 2026-10-01
 
 ### Changed

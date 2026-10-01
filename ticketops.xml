@@ -15,7 +15,7 @@
     </authors>
     <versions>
         <version>
-            <num>0.1.7</num>
+            <num>0.1.8</num>
             <compatibility>11.0.8 &lt;= GLPI &lt; 11.1.0</compatibility>
         </version>
     </versions>

@@ -45,6 +45,14 @@ final class TicketPanel
             'ticketTitle' => $snapshot->title,
             'entityId' => $snapshot->entityId,
             'requesters' => $snapshot->requesters,
+            'findings' => array_map(
+                static fn(DiagnosticFinding $finding): array => [
+                    'code' => $finding->code,
+                    'level' => $finding->level,
+                    'message' => $finding->message,
+                ],
+                $findings,
+            ),
             'operatorEntities' => $operatorEntities,
             'currentUser' => ['id' => Session::getLoginUserID(), 'name' => getUserName(Session::getLoginUserID())],
             'canOperate' => $canOperate,

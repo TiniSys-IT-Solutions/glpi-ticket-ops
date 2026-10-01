@@ -3,6 +3,7 @@
 .ticketops-summary { border-bottom: 1px solid var(--tblr-border-color); padding-bottom: .5rem; }
 .ticketops-summary dt, .ticketops-summary dd { margin-bottom: .35rem; }
 .ticketops-finding { border-left: .25rem solid var(--tblr-border-color); margin: .35rem 0; padding: .35rem .65rem; }
+.ticketops-field-alert { border-left: .25rem solid var(--tblr-border-color); padding-left: .65rem; }
 .ticketops-success { border-color: var(--tblr-success); }
 .ticketops-information { border-color: var(--tblr-info); }
 .ticketops-warning { border-color: var(--tblr-warning); }

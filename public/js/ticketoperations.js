@@ -26,6 +26,19 @@
     blocking: {icon: 'ti-alert-octagon', colour: 'danger'},
   };
 
+  const findingTargets = {
+    email_requester: 'requester',
+    inactive_requester: 'requester',
+    invalid_requester_entity: 'requester',
+    missing_category: 'category',
+    unqualified_email: 'category',
+    missing_location: 'location',
+    missing_technician: 'technician',
+    incompatible_actor: 'entity',
+  };
+
+  const findingPriority = {success: 0, information: 1, warning: 2, blocking: 3};
+
   const mountHealthShortcut = () => {
     const panel = document.querySelector('[data-ticketops]');
     const title = document.querySelector('#navigationheader .navigationheader-title');
@@ -71,6 +84,7 @@
       this.element.setAttribute('aria-hidden', 'true');
       this.element.innerHTML = this.template();
       document.body.append(this.element);
+      this.markDiagnosticFields();
       this.modal = new bootstrap.Modal(this.element);
       this.bind();
       this.setupOrganizationOnly();
@@ -85,7 +99,7 @@
       const requesterChoice = onlyRequester
         ? `<input type="hidden" class="ticketops-actor" value="${onlyRequester.link_id}"><div class="form-control bg-secondary-lt">${escapeHtml(onlyRequesterLabel)}</div>`
         : '<select class="form-select ticketops-actor"></select>';
-      const requesterFields = this.data.modules.requester ? `<div class="card card-sm mb-3"><div class="card-header"><h4 class="card-title">${escapeHtml(l.requester_section)}</h4></div><div class="card-body"><div class="mb-3"><label class="form-label">${escapeHtml(l.requester)}</label>${requesterChoice}</div><div><label class="form-label">${escapeHtml(l.search)}</label><div class="ticketops-native-requester"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span></div></div></div></div>` : '';
+      const requesterFields = this.data.modules.requester ? `<div class="card card-sm mb-3"><div class="card-header"><h4 class="card-title">${escapeHtml(l.requester_section)}</h4></div><div class="card-body"><div class="mb-3 ticketops-field-wrapper"><label class="form-label">${escapeHtml(l.requester)}</label>${requesterChoice}</div><div><label class="form-label">${escapeHtml(l.search)}</label><div class="ticketops-native-requester"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span></div></div></div></div>` : '';
       return `<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title"><i class="ti ti-adjustments me-2"></i>${escapeHtml(l.title)}</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="${escapeHtml(l.close)}"></button></div><div class="modal-body"><p class="mb-1"><strong>#${this.data.ticketId} — ${escapeHtml(this.data.ticketTitle)}</strong></p><p class="text-muted mb-3">${escapeHtml(l.current_entity)} : #${this.data.entityId}</p><div class="ticketops-target-entity"></div>${requesterFields}<div class="ticketops-organization-selection"></div><div class="ticketops-preview mt-3"></div></div><div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="ti ti-x me-1"></i>${escapeHtml(l.cancel)}</button><button type="button" class="btn btn-outline-primary ticketops-analyse" disabled><i class="ti ti-eye me-1"></i>${escapeHtml(l.preview)}</button><button type="button" class="btn btn-primary ticketops-execute" disabled><i class="ti ti-check me-1"></i>${escapeHtml(l.execute)}</button></div></div></div>`;
     }
 
@@ -155,6 +169,7 @@
       const quick = this.data.modules.quick ? `<label class="form-check mb-3"><input class="form-check-input ticketops-quick" type="checkbox"><span class="form-check-label"><i class="ti ti-user-check me-1"></i>${escapeHtml(this.data.labels.assign_me)}</span></label>` : '';
       target.innerHTML = `<div class="card card-sm mb-3"><div class="card-header"><h4 class="card-title">${escapeHtml(this.data.labels.target_entity)}</h4></div><div class="card-body ticketops-native-entity"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span></div></div>`;
       organization.innerHTML = `<div class="ticketops-organization ${showOrganization ? '' : 'd-none'}"><h4>${escapeHtml(this.data.labels.optional_organization)}</h4>${quick}<div class="row"></div></div>`;
+      this.markDiagnosticFields();
       organization.querySelector('.ticketops-quick')?.addEventListener('change', () => {
         this.plan = null;
         this.element.querySelector('.ticketops-execute').disabled = true;
@@ -204,7 +219,26 @@
       const row = container.querySelector('.row');
       row.innerHTML = '<div class="col-12 text-center py-3"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span></div>';
       if (!this.data.modules.organization) return;
-      window.jQuery(row).load(`${this.data.nativeFieldsUrl}?entity_id=${encodeURIComponent(entityId)}`);
+      window.jQuery(row).load(`${this.data.nativeFieldsUrl}?entity_id=${encodeURIComponent(entityId)}`, () => this.markDiagnosticFields());
+    }
+
+    markDiagnosticFields() {
+      const targets = {};
+      (this.data.findings || []).forEach((finding) => {
+        const target = findingTargets[finding.code];
+        if (!target || (findingPriority[finding.level] || 0) <= (findingPriority[targets[target]?.level] || 0)) return;
+        targets[target] = finding;
+      });
+      Object.entries(targets).forEach(([target, finding]) => {
+        let element = null;
+        if (target === 'requester') element = this.element.querySelector('.ticketops-actor')?.closest('.ticketops-field-wrapper');
+        else if (target === 'entity') element = this.element.querySelector('.ticketops-target-entity .card');
+        else element = this.element.querySelector(`.ticketops-${target}`)?.closest('.col-md-6');
+        if (!element) return;
+        element.classList.remove('ticketops-information', 'ticketops-warning', 'ticketops-blocking');
+        element.classList.add('ticketops-field-alert', `ticketops-${finding.level}`);
+        element.setAttribute('title', finding.message);
+      });
     }
 
     async preview() {
@@ -254,5 +288,5 @@
   }
 
   window.GLPI = window.GLPI || {};
-  window.GLPI.TicketOperations = Object.freeze({version: '0.1.7'});
+  window.GLPI.TicketOperations = Object.freeze({version: '0.1.8'});
 })();

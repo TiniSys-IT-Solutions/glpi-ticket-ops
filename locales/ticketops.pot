@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TicketOps 0.1.7\n"
+"Project-Id-Version: TicketOps 0.1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 16:43+0530\n"
-"PO-Revision-Date: 2026-10-01 16:43+0530\n"
+"POT-Creation-Date: 2026-10-01 16:58+0530\n"
+"PO-Revision-Date: 2026-10-01 16:58+0530\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -120,7 +120,7 @@ msgid "No organization inconsistency was detected."
 msgstr ""
 
 #: src/Profile.php:31 src/Profile.php:51 src/Ui/TicketTab.php:33
-#: src/Ui/TicketPanel.php:95 setup.php:74
+#: src/Ui/TicketPanel.php:103 setup.php:74
 msgid "TicketOps"
 msgstr ""
 
@@ -132,148 +132,148 @@ msgstr ""
 msgid "Correct a ticket requester and entity"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:60 src/Ui/TicketPanel.php:84
-#: src/Ui/TicketPanel.php:161
+#: src/Ui/TicketPanel.php:68 src/Ui/TicketPanel.php:92
+#: src/Ui/TicketPanel.php:169
 msgid "Reorganize ticket"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:61
+#: src/Ui/TicketPanel.php:69
 msgid "Optional requester correction"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:62
+#: src/Ui/TicketPanel.php:70
 msgid "Requester to replace"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:63
+#: src/Ui/TicketPanel.php:71
 msgid "Search an existing user"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:64
+#: src/Ui/TicketPanel.php:72
 msgid "Close"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:65
+#: src/Ui/TicketPanel.php:73
 msgid "Cancel"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:66
+#: src/Ui/TicketPanel.php:74
 msgid "Preview"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:67 src/Ui/TicketPanel.php:86
+#: src/Ui/TicketPanel.php:75 src/Ui/TicketPanel.php:94
 msgid "Apply ticket organization"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:68
+#: src/Ui/TicketPanel.php:76
 msgid "Searching…"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:69 src/Controller/SearchUsersController.php:31
+#: src/Ui/TicketPanel.php:77 src/Controller/SearchUsersController.php:31
 msgid "No accessible user found."
 msgstr ""
 
-#: src/Ui/TicketPanel.php:70
+#: src/Ui/TicketPanel.php:78
 msgid "Target entity"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:71
+#: src/Ui/TicketPanel.php:79
 msgid "Choose explicitly"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:72
+#: src/Ui/TicketPanel.php:80
 msgid "Expected result"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:73
+#: src/Ui/TicketPanel.php:81
 msgid "Remove incompatible relation"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:74
+#: src/Ui/TicketPanel.php:82
 msgid "Email address"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:75
+#: src/Ui/TicketPanel.php:83
 msgid ""
 "The target entity, optional requester and compatible organization shown "
 "above will be applied."
 msgstr ""
 
-#: src/Ui/TicketPanel.php:76 src/Ui/TicketPanel.php:134
+#: src/Ui/TicketPanel.php:84 src/Ui/TicketPanel.php:142
 msgid "Current entity"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:77
+#: src/Ui/TicketPanel.php:85
 msgid "Optional ticket organization"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:78 src/Ui/TicketPanel.php:136
+#: src/Ui/TicketPanel.php:86 src/Ui/TicketPanel.php:144
 #: src/Controller/SearchOrganizationOptionsController.php:150
 msgid "ITIL category"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:79 src/Ui/TicketPanel.php:137
+#: src/Ui/TicketPanel.php:87 src/Ui/TicketPanel.php:145
 #: src/Controller/SearchOrganizationOptionsController.php:151
 msgid "Location"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:80
+#: src/Ui/TicketPanel.php:88
 #: src/Controller/SearchOrganizationOptionsController.php:153
 msgid "Technician"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:81
+#: src/Ui/TicketPanel.php:89
 #: src/Controller/SearchOrganizationOptionsController.php:152
 msgid "Observer"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:82
+#: src/Ui/TicketPanel.php:90
 msgid "Status"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:83
+#: src/Ui/TicketPanel.php:91
 #: src/Controller/SearchOrganizationOptionsController.php:91
 #: src/Controller/SearchOrganizationOptionsController.php:119
 #: src/Controller/SearchOrganizationOptionsController.php:131
 msgid "Keep current value"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:85
+#: src/Ui/TicketPanel.php:93
 msgid "Reorganize ticket assignment"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:87
+#: src/Ui/TicketPanel.php:95
 msgid "Assign to me and start"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:88
+#: src/Ui/TicketPanel.php:96
 #: src/Controller/SearchOrganizationOptionsController.php:73
 msgid "No requester change"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:99 src/Ui/TicketPanel.php:110
-#: src/Ui/TicketPanel.php:112
+#: src/Ui/TicketPanel.php:107 src/Ui/TicketPanel.php:118
+#: src/Ui/TicketPanel.php:120
 msgid "Ticket organization"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:135
+#: src/Ui/TicketPanel.php:143
 msgid "Source"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:138
+#: src/Ui/TicketPanel.php:146
 msgid "Actors"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:139
+#: src/Ui/TicketPanel.php:147
 #, php-format
 msgid "%1$d requester(s), %2$d assignee(s), %3$d observer(s)"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:144
+#: src/Ui/TicketPanel.php:152
 msgid "Last update"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:163
+#: src/Ui/TicketPanel.php:171
 msgid ""
 "TicketOps never grants additional access and does not replay business rules."
 msgstr ""
