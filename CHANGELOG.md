@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.1.11 - 2026-10-02
+
+### Fixed
+
+- acquire the ticket read lock through GLPI 11's supported `DBmysql::doQuery()` API instead of its disabled `query()` method;
+- display native GLPI JSON error messages instead of the boolean error flag;
+
+## 0.1.10 - 2026-10-02
+
+### Security
+
+- enforce native ticket update, assignment and self-assignment rights on central routes;
+- use typed identities for requester replacement and explicit relation removals;
+- revalidate the immutable plan while holding a transactional read lock on the ticket;
+- include title, status, take-into-account SLA/OLA and native linked records in concurrency checks;
+- block shared documents outside the target scope without modifying document links.
+
+### Fixed
+
+- preserve explicitly chosen category and location when the old value is removed;
+- avoid redundant removal confirmations for explicitly replaced requester and technician actors;
+- provide complete actor deletion descriptors to native ONUPDATE rules;
+- match native user validity, technician eligibility, category type and descendant-location selectors;
+- keep native gabarit checks and closed-ticket restrictions without imposing unrelated new-template prerequisites;
+- redirect to the ticket search if native ticket readability is lost after the operation.
+
+## 0.1.9 - 2026-10-02
+
+### Changed
+
+- move the ticket number and title into the existing dialog header with ellipsis;
+- add optional native title correction and show the current entity name in the replacement heading;
+- flatten the requester correction section to match optional ticket organization;
+- replace the separate Preview action with internal validation on Apply, preserving explicit removal choices, one-use plan tokens and concurrency checks;
+- lock submission controls and reject duplicate clicks while applying.
+
 ## 0.1.8 - 2026-10-01
 
 ### Changed

@@ -19,11 +19,11 @@ use Symfony\Component\Routing\Attribute\Route;
 final class SearchUsersController extends AbstractController
 {
     #[Route('/TicketOps/Users/{id}', name: 'ticketops_user_entities', methods: 'GET', requirements: ['id' => '\\d+'])]
-    #[SecurityStrategy(Firewall::STRATEGY_AUTHENTICATED)]
+    #[SecurityStrategy(Firewall::STRATEGY_CENTRAL_ACCESS)]
     public function resolve(int $id): JsonResponse
     {
         Session::checkLoginUser();
-        if (!Config::enabled('requester_entity_switch') || !Profile::canSwitchRequesterAndEntity()) {
+        if (!Session::haveRight('ticket', UPDATE) || !Config::enabled('requester_entity_switch') || !Profile::canSwitchRequesterAndEntity()) {
             throw new AccessDeniedHttpException();
         }
         $resolved = (new UserEntitySearchService())->resolve($id);

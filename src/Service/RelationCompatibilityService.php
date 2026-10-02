@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GlpiPlugin\Ticketops\Service;
 
+use GlpiPlugin\Ticketops\Domain\RelationIdentity;
 use GlpiPlugin\Ticketops\Domain\TicketSnapshot;
-use Profile_User;
 
 final class RelationCompatibilityService
 {
@@ -17,7 +17,7 @@ final class RelationCompatibilityService
         foreach ([...$ticket->requesters, ...$ticket->assignees, ...$ticket->observers] as $actor) {
             $actor['kind'] = 'actor';
             $actor['removable'] = true;
-            $compatible = $this->actorIsValid($actor, $targetEntity);
+            $compatible = $ticket->entityId === $targetEntity || $this->actorIsValid($actor, $targetEntity);
             if ($compatible) {
                 $preserved[] = $actor;
             } else {
@@ -30,12 +30,14 @@ final class RelationCompatibilityService
             ['TicketTemplate', 'tickettemplates_id', $ticket->templateId, -103],
             ['SLA', 'slas_id_ttr', $ticket->slaId, -104],
             ['OLA', 'olas_id_ttr', $ticket->olaId, -105],
+            ['SLA', 'slas_id_tto', $ticket->slaOwnId, -106],
+            ['OLA', 'olas_id_tto', $ticket->olaOwnId, -107],
         ] as [$itemtype, $field, $id, $linkId]) {
             if ($id <= 0) {
                 continue;
             }
             $relation = ['link_id' => $linkId, 'kind' => 'field', 'field' => $field, 'itemtype' => $itemtype, 'items_id' => $id, 'name' => \Dropdown::getDropdownName($this->tableFor($itemtype), $id), 'removable' => true];
-            if ($this->itemIsValid($itemtype, $id, $targetEntity)) {
+            if ($ticket->entityId === $targetEntity || $this->itemIsValid($itemtype, $id, $targetEntity)) {
                 $preserved[] = $relation;
             } else {
                 $incompatible[] = $relation;
@@ -48,6 +50,16 @@ final class RelationCompatibilityService
                 $incompatible[] = $relation;
             }
         }
+        foreach ($ticket->linkedState['relations'] ?? [] as $relation) {
+            if ((new LinkedRecordService())->isCompatible($relation, $targetEntity, $ticket->entityId)) {
+                $preserved[] = $relation;
+            } else {
+                $incompatible[] = $relation;
+            }
+        }
+        $withKey = static fn(array $relation): array => $relation + ['key' => RelationIdentity::key($relation)];
+        $preserved = array_map($withKey, $preserved);
+        $incompatible = array_map($withKey, $incompatible);
         $warnings = [__('GLPI will evaluate native ONUPDATE ticket rules during execution.', 'ticketops')];
 
         return ['preserved' => $preserved, 'incompatible' => $incompatible, 'warnings' => $warnings];
@@ -63,7 +75,8 @@ final class RelationCompatibilityService
             return false;
         }
         $entityId = (int) $item->getEntityID();
-        if ($entityId < 0 || $entityId === $targetEntity) {
+        if ($entityId < 0 || $entityId === $targetEntity
+            || ($itemtype === 'Location' && in_array($entityId, array_map('intval', getSonsOf('glpi_entities', $targetEntity)), true))) {
             return true;
         }
 
@@ -111,7 +124,7 @@ final class RelationCompatibilityService
     {
         $id = (int) $actor['items_id'];
         if ($actor['itemtype'] === 'User') {
-            return $id === 0 || in_array($targetEntity, array_map('intval', Profile_User::getUserEntities($id, true)), true);
+            return $id === 0 || \User::isValidUserForEntity($id, $targetEntity);
         }
         if ($actor['itemtype'] === 'Group') {
             $group = new \Group();
@@ -124,6 +137,10 @@ final class RelationCompatibilityService
                 || ((bool) ($group->fields['is_recursive'] ?? false) && in_array($targetEntity, array_map('intval', getSonsOf('glpi_entities', $entityId)), true));
         }
 
-        return true;
+        if ($actor['itemtype'] === 'Supplier') {
+            return $this->itemIsValid('Supplier', $id, $targetEntity);
+        }
+
+        return false;
     }
 }

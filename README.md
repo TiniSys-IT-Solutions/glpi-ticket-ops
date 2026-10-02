@@ -5,7 +5,7 @@
 <h1 align="center">TicketOps</h1>
 
 <p align="center">
-  <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases"><img src="https://img.shields.io/badge/version-0.1.8-0ea5e9" alt="Version 0.1.8"></a>
+  <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases"><img src="https://img.shields.io/badge/version-0.1.11-0ea5e9" alt="Version 0.1.11"></a>
   <img src="https://img.shields.io/badge/GLPI-11.0.8%E2%80%93%3C11.1.0-0b7285" alt="GLPI 11.0.8 to below 11.1.0">
   <img src="https://img.shields.io/badge/PHP-%E2%89%A58.2-777bb4" alt="PHP 8.2 or newer">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-16a34a" alt="GPL-3.0-or-later"></a>
@@ -16,13 +16,13 @@ TicketOps is a GLPI 11 plugin for safe, previewed and controlled operations on e
 
 > Faciliter la qualification, l’organisation et l’affectation des tickets GLPI sans contourner le modèle multi-entités.
 
-Version `0.1.8` is the hardened preproduction baseline: native GLPI selectors, requester/entity intersection, immutable previews, relation-preserving updates and field-level visual diagnostics.
+Version `0.1.11` strengthens native authorization, shared-document scope and concurrency checks, and simplifies the reorganization dialog with title correction and validation on Apply, while retaining native GLPI selectors, requester/entity intersection, immutable plans, relation-preserving updates and field-level visual diagnostics.
 
 Diagnostics, requester/entity correction, organization and quick assignment can be enabled independently from the TicketOps configuration page. Diagnostics are enabled by default; every mutation module remains disabled until an administrator explicitly enables it.
 
 ## Usage
 
-On a saved ticket, the **Ticket organization** panel reports requester, assignment, category, location and entity consistency. Authorized technicians can open **Reorganize ticket**, optionally replace a requester, choose a compatible target entity and explicitly update category, location, technician or observer. Native GLPI selectors are scoped to the target entity, the complete operation is previewed, and a ticket modified after preview is refused without mutation.
+On a saved ticket, the **Ticket organization** panel reports requester, assignment, category, location and entity consistency. Authorized technicians can open **Reorganize ticket**, optionally replace a requester, choose a compatible target entity and explicitly update category, location, technician or observer. Native GLPI selectors are scoped to the target entity, the title can be corrected, and Apply validates the complete operation internally before execution. Blocking issues appear in the dialog; incompatible relation removals still require an explicit choice. A ticket modified between validation and execution is refused without mutation.
 
 ## Security commitments
 

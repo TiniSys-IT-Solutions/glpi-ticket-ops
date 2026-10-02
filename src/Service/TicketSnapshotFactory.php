@@ -10,11 +10,14 @@ use Ticket;
 
 final class TicketSnapshotFactory
 {
-    public function fromTicket(Ticket $ticket): TicketSnapshot
+    public function fromTicket(Ticket $ticket, bool $includeLinkedRecords = false): TicketSnapshot
     {
         // GLPI lazily loads actors. Force the native actor collections to be
         // populated before both normalizing them and using the native counts.
         $ticket->loadActors();
+
+        $nativeFields = array_filter($ticket->fields, static fn(mixed $value): bool => is_scalar($value) || $value === null);
+        ksort($nativeFields);
 
         return new TicketSnapshot(
             (int) $ticket->getID(),
@@ -32,6 +35,11 @@ final class TicketSnapshotFactory
             $ticket->countUsers(CommonITILActor::ASSIGN),
             $ticket->countGroups(CommonITILActor::ASSIGN),
             $ticket->countSuppliers(CommonITILActor::ASSIGN),
+            (int) ($ticket->fields['status'] ?? 0),
+            (int) ($ticket->fields['slas_id_tto'] ?? 0),
+            (int) ($ticket->fields['olas_id_tto'] ?? 0),
+            $includeLinkedRecords ? (new LinkedRecordService())->snapshot($ticket) : [],
+            $nativeFields,
         );
     }
 

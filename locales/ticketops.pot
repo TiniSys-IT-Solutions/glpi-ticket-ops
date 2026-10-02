@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TicketOps 0.1.8\n"
+"Project-Id-Version: TicketOps 0.1.11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 16:58+0530\n"
-"PO-Revision-Date: 2026-10-01 16:58+0530\n"
+"POT-Creation-Date: 2026-10-02 17:41+0530\n"
+"PO-Revision-Date: 2026-10-02 17:41+0530\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -17,66 +17,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Service/RelationCompatibilityService.php:51
+#: src/Service/RelationCompatibilityService.php:63
 msgid "GLPI will evaluate native ONUPDATE ticket rules during execution."
 msgstr ""
 
-#: src/Service/TicketOperationExecutor.php:26
-msgid "The ticket is unavailable or you are not allowed to update it."
-msgstr ""
-
-#: src/Service/TicketOperationExecutor.php:29
+#: src/Service/TicketOperationExecutor.php:25
 msgid "This plan contains blocking issues."
 msgstr ""
 
-#: src/Service/TicketOperationExecutor.php:33
-msgid "The ticket changed after the preview. Create a new preview."
+#: src/Service/TicketOperationExecutor.php:35
+msgid "The ticket is unavailable or you are not allowed to update it."
 msgstr ""
 
-#: src/Service/TicketOperationExecutor.php:39
+#: src/Service/TicketOperationExecutor.php:49
+#: src/Service/TicketOperationExecutor.php:53
+msgid "The ticket changed during validation. Apply the operation again."
+msgstr ""
+
+#: src/Service/TicketOperationExecutor.php:57
 msgid "GLPI refused the ticket update."
 msgstr ""
 
-#: src/Service/TicketOperationExecutor.php:47
+#: src/Service/TicketOperationExecutor.php:65
 msgid "The updated ticket could not be reloaded."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:30
+#: src/Service/TicketOperationValidator.php:27
+msgid "The selected category is not available for this ticket type."
+msgstr ""
+
+#: src/Service/TicketOperationValidator.php:34
+msgid "GLPI does not allow this technician assignment."
+msgstr ""
+
+#: src/Service/TicketOperationValidator.php:40
+msgid "GLPI does not allow assigning this ticket to you and starting it."
+msgstr ""
+
+#: src/Service/TicketOperationValidator.php:44
+msgid "GLPI does not allow removing the current assignment."
+msgstr ""
+
+#: src/Service/TicketOperationValidator.php:51
+msgid "GLPI does not allow these title or actor changes on a closed ticket."
+msgstr ""
+
+#: src/Service/TicketOperationValidator.php:71
+#, php-format
+msgid "The target ticket template requires: %s."
+msgstr ""
+
+#: src/Service/TicketOperationPlanner.php:31
+msgid "The ticket title must contain between 1 and 255 characters."
+msgstr ""
+
+#: src/Service/TicketOperationPlanner.php:40
 msgid "The requester correction is incomplete."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:39
+#: src/Service/TicketOperationPlanner.php:49
 msgid "The requester to replace no longer exists on this ticket."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:43
+#: src/Service/TicketOperationPlanner.php:53
 msgid "The selected requester is not usable in the target entity."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:47
+#: src/Service/TicketOperationPlanner.php:57
 msgid "The selected requester is already present on this ticket."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:55
-#: src/Service/TicketOperationPlanner.php:62
+#: src/Service/TicketOperationPlanner.php:65
+#: src/Service/TicketOperationPlanner.php:72
 msgid "An organization choice is not valid in the target entity."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:79
+#: src/Service/TicketOperationPlanner.php:105
 #, php-format
 msgid "The incompatible relation %s cannot be removed safely by TicketOps."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:88
+#: src/Service/TicketOperationPlanner.php:117
 msgid ""
 "Every incompatible relation must be explicitly confirmed before removal."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:104
+#: src/Service/TicketOperationPlanner.php:133
 msgid "GLPI will emit the final native ticket update notification."
 msgstr ""
 
-#: src/Service/TicketOperationPlanner.php:105
+#: src/Service/TicketOperationPlanner.php:134
 msgid ""
 "GLPI will evaluate its native ONUPDATE rules; TicketOps requests no "
 "additional replay."
@@ -120,7 +150,7 @@ msgid "No organization inconsistency was detected."
 msgstr ""
 
 #: src/Profile.php:31 src/Profile.php:51 src/Ui/TicketTab.php:33
-#: src/Ui/TicketPanel.php:103 setup.php:74
+#: src/Ui/TicketPanel.php:105 setup.php:74
 msgid "TicketOps"
 msgstr ""
 
@@ -132,148 +162,147 @@ msgstr ""
 msgid "Correct a ticket requester and entity"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:68 src/Ui/TicketPanel.php:92
-#: src/Ui/TicketPanel.php:169
+#: src/Ui/TicketPanel.php:70 src/Ui/TicketPanel.php:94
+#: src/Ui/TicketPanel.php:171
 msgid "Reorganize ticket"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:69
-msgid "Optional requester correction"
-msgstr ""
-
-#: src/Ui/TicketPanel.php:70
-msgid "Requester to replace"
-msgstr ""
-
 #: src/Ui/TicketPanel.php:71
-msgid "Search an existing user"
+msgid "Ticket title"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:72
-msgid "Close"
+#, php-format
+msgid "Entity: replace %s"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:73
-msgid "Cancel"
+msgid "The operation could not be applied."
 msgstr ""
 
 #: src/Ui/TicketPanel.php:74
-msgid "Preview"
+msgid "Optional requester correction"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:75 src/Ui/TicketPanel.php:94
-msgid "Apply ticket organization"
+#: src/Ui/TicketPanel.php:75
+msgid "Requester to replace"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:76
-msgid "Searching…"
+msgid "Search an existing user"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:77 src/Controller/SearchUsersController.php:31
-msgid "No accessible user found."
+#: src/Ui/TicketPanel.php:77
+msgid "Close"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:78
-msgid "Target entity"
+msgid "Cancel"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:79
-msgid "Choose explicitly"
+#: src/Ui/TicketPanel.php:79 src/Ui/TicketPanel.php:96
+msgid "Apply ticket organization"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:80
-msgid "Expected result"
+msgid "Searching…"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:81
-msgid "Remove incompatible relation"
+#: src/Ui/TicketPanel.php:81 src/Controller/SearchUsersController.php:31
+msgid "No accessible user found."
 msgstr ""
 
 #: src/Ui/TicketPanel.php:82
-msgid "Email address"
+msgid "Target entity"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:83
-msgid ""
-"The target entity, optional requester and compatible organization shown "
-"above will be applied."
+msgid "Choose explicitly"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:84 src/Ui/TicketPanel.php:142
-msgid "Current entity"
+#: src/Ui/TicketPanel.php:84
+msgid "Remove incompatible relation"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:85
-msgid "Optional ticket organization"
+msgid "Email address"
 msgstr ""
 
 #: src/Ui/TicketPanel.php:86 src/Ui/TicketPanel.php:144
+msgid "Current entity"
+msgstr ""
+
+#: src/Ui/TicketPanel.php:87
+msgid "Optional ticket organization"
+msgstr ""
+
+#: src/Ui/TicketPanel.php:88 src/Ui/TicketPanel.php:146
 #: src/Controller/SearchOrganizationOptionsController.php:150
 msgid "ITIL category"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:87 src/Ui/TicketPanel.php:145
+#: src/Ui/TicketPanel.php:89 src/Ui/TicketPanel.php:147
 #: src/Controller/SearchOrganizationOptionsController.php:151
 msgid "Location"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:88
+#: src/Ui/TicketPanel.php:90
 #: src/Controller/SearchOrganizationOptionsController.php:153
 msgid "Technician"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:89
+#: src/Ui/TicketPanel.php:91
 #: src/Controller/SearchOrganizationOptionsController.php:152
 msgid "Observer"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:90
+#: src/Ui/TicketPanel.php:92
 msgid "Status"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:91
+#: src/Ui/TicketPanel.php:93
 #: src/Controller/SearchOrganizationOptionsController.php:91
 #: src/Controller/SearchOrganizationOptionsController.php:119
 #: src/Controller/SearchOrganizationOptionsController.php:131
 msgid "Keep current value"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:93
+#: src/Ui/TicketPanel.php:95
 msgid "Reorganize ticket assignment"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:95
+#: src/Ui/TicketPanel.php:97
 msgid "Assign to me and start"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:96
+#: src/Ui/TicketPanel.php:98
 #: src/Controller/SearchOrganizationOptionsController.php:73
 msgid "No requester change"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:107 src/Ui/TicketPanel.php:118
-#: src/Ui/TicketPanel.php:120
+#: src/Ui/TicketPanel.php:109 src/Ui/TicketPanel.php:120
+#: src/Ui/TicketPanel.php:122
 msgid "Ticket organization"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:143
+#: src/Ui/TicketPanel.php:145
 msgid "Source"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:146
+#: src/Ui/TicketPanel.php:148
 msgid "Actors"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:147
+#: src/Ui/TicketPanel.php:149
 #, php-format
 msgid "%1$d requester(s), %2$d assignee(s), %3$d observer(s)"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:152
+#: src/Ui/TicketPanel.php:154
 msgid "Last update"
 msgstr ""
 
-#: src/Ui/TicketPanel.php:171
+#: src/Ui/TicketPanel.php:173
 msgid ""
 "TicketOps never grants additional access and does not replay business rules."
 msgstr ""
@@ -286,8 +315,8 @@ msgstr ""
 msgid "Choose a target entity"
 msgstr ""
 
-#: src/Controller/ExecuteOperationController.php:61
-msgid "The submitted preview is obsolete."
+#: src/Controller/ExecuteOperationController.php:65
+msgid "The submitted operation is obsolete. Apply it again."
 msgstr ""
 
 #: front/config.php:18

@@ -9,7 +9,7 @@ final class Plugin
     public const KEY = 'ticketops';
     public const NAME = 'TicketOps';
     public const SHORT_NAME = 'TicketOps';
-    public const VERSION = '0.1.8';
+    public const VERSION = '0.1.11';
 
     private function __construct() {}
 }

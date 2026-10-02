@@ -24,7 +24,7 @@ use Ticket;
 final class ExecuteOperationController extends AbstractController
 {
     #[Route('/TicketOps/Ticket/{id}/Execute', name: 'ticketops_execute', methods: 'POST', requirements: ['id' => '\\d+'])]
-    #[SecurityStrategy(Firewall::STRATEGY_AUTHENTICATED)]
+    #[SecurityStrategy(Firewall::STRATEGY_CENTRAL_ACCESS)]
     public function __invoke(Request $request, int $id): JsonResponse
     {
         Session::checkLoginUser();
@@ -36,29 +36,33 @@ final class ExecuteOperationController extends AbstractController
         if (!(new TicketOperationGuard())->canOperate($ticket, $targetEntityId)) {
             throw new AccessDeniedHttpException();
         }
-        $remove = array_values(array_filter(array_map('intval', (array) $request->request->all('remove_relation_ids')), static fn(int $value): bool => $value !== 0));
+        $remove = array_values(array_filter($request->request->all('remove_relation_keys'), static fn(mixed $key): bool => is_string($key) && $key !== ''));
         $organization = $this->organizationChanges($request);
+        $ticketTitle = array_key_exists('ticket_title', $request->request->all())
+            ? $request->request->getString('ticket_title')
+            : null;
         $organizationOnly = $organization;
         unset($organizationOnly['status']);
         if (isset($organization['status'])) {
             unset($organizationOnly['technician']);
         }
-        if (($request->request->getInt('replaced_actor_id') > 0 && !Config::enabled('requester_entity_switch'))
-            || ($organizationOnly !== [] && !Config::enabled('organization'))
+        if (($request->request->getString('replaced_actor_key') !== '' && !Config::enabled('requester_entity_switch'))
+            || (($organizationOnly !== [] || $ticketTitle !== null) && !Config::enabled('organization'))
             || (isset($organization['status']) && !Config::enabled('quick_assignment'))) {
             throw new AccessDeniedHttpException();
         }
         $plan = (new TicketOperationPlanner())->build(
             $ticket,
-            $request->request->getInt('replaced_actor_id'),
+            $request->request->getString('replaced_actor_key'),
             $request->request->getInt('new_requester_id'),
             $targetEntityId,
             $remove,
             $organization,
+            $ticketTitle,
         );
         if (!hash_equals($plan->fingerprint, $request->request->getString('fingerprint'))
             || !(new PreviewTokenStore())->consume($request->request->getString('preview_token'), $plan, Session::getLoginUserID())) {
-            throw new BadRequestHttpException(__('The submitted preview is obsolete.', 'ticketops'));
+            throw new BadRequestHttpException(__('The submitted operation is obsolete. Apply it again.', 'ticketops'));
         }
         try {
             $updated = (new TicketOperationExecutor())->execute($plan);
@@ -66,7 +70,7 @@ final class ExecuteOperationController extends AbstractController
             return new JsonResponse(['ok' => false, 'error' => $exception->getMessage()], 409);
         }
 
-        return new JsonResponse(['ok' => true, 'redirect' => $updated->getLinkURL()]);
+        return new JsonResponse(['ok' => true, 'redirect' => $updated->canViewItem() ? $updated->getLinkURL() : Ticket::getSearchURL()]);
     }
 
     /** @return array<string, int> */

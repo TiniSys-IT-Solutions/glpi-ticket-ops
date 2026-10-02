@@ -26,6 +26,8 @@ All layers are populated. `TicketSnapshot` is the canonical normalized state sha
 
 There is no menu, plugin table or generic CRUD model. A single guarded legacy configuration endpoint is justified by the need to enable each implemented functional module independently; it stores values through GLPI's native configuration API.
 
+The immutable planner and executor share a native input builder, including complete deletion descriptors for GLPI rule processing. Detailed linked-record snapshots are limited to preparation and execution. The executor rebuilds the plan under a read lock on the ticket row. GLPI 11 disables `DBmysql::query()`; the fixed, integer-ID-only `SELECT ... FOR UPDATE` uses the supported `DBmysql::doQuery()` API because the native query builder has no row-lock option. All ticket writes still use `Ticket::update()`.
+
 Ticket mutation is a single native `Ticket::update()` carrying the target entity and final actor lists inside a database transaction. GLPI performs its own consistency checks, history, hooks and notification. A database rollback cannot undo an already executed external hook; this limitation is why TicketOps performs every deterministic validation before update and does not add external side effects.
 
 Native organization fields are rendered by a dedicated authenticated controller. Category, location, technician and observer candidates are constrained to the selected target entity and revalidated by the immutable plan builder. The executor applies only explicitly selected changes in the same native ticket update as the requester and entity correction.

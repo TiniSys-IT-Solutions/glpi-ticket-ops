@@ -6,6 +6,7 @@ namespace GlpiPlugin\Ticketops\Ui;
 
 use GlpiPlugin\Ticketops\Config;
 use GlpiPlugin\Ticketops\Domain\DiagnosticFinding;
+use GlpiPlugin\Ticketops\Domain\RelationIdentity;
 use GlpiPlugin\Ticketops\Security\TicketOperationGuard;
 use GlpiPlugin\Ticketops\Service\TicketDiagnosticService;
 use GlpiPlugin\Ticketops\Service\TicketSnapshotFactory;
@@ -44,7 +45,8 @@ final class TicketPanel
             'ticketId' => $snapshot->id,
             'ticketTitle' => $snapshot->title,
             'entityId' => $snapshot->entityId,
-            'requesters' => $snapshot->requesters,
+            'entityName' => \Dropdown::getDropdownName('glpi_entities', $snapshot->entityId),
+            'requesters' => array_map(static fn(array $actor): array => $actor + ['key' => RelationIdentity::key($actor)], $snapshot->requesters),
             'findings' => array_map(
                 static fn(DiagnosticFinding $finding): array => [
                     'code' => $finding->code,
@@ -66,21 +68,21 @@ final class TicketPanel
             'nativeFieldsUrl' => rtrim((string) ($CFG_GLPI['root_doc'] ?? ''), '/') . '/plugins/ticketops/TicketOps/Ticket/' . $snapshot->id . '/NativeFields',
             'labels' => [
                 'title' => __('Reorganize ticket', 'ticketops'),
+                'ticket_title' => __('Ticket title', 'ticketops'),
+                'replace_entity' => __('Entity: replace %s', 'ticketops'),
+                'validation_failed' => __('The operation could not be applied.', 'ticketops'),
                 'requester_section' => __('Optional requester correction', 'ticketops'),
                 'requester' => __('Requester to replace', 'ticketops'),
                 'search' => __('Search an existing user', 'ticketops'),
                 'close' => __('Close', 'ticketops'),
                 'cancel' => __('Cancel', 'ticketops'),
-                'preview' => __('Preview', 'ticketops'),
                 'execute' => __('Apply ticket organization', 'ticketops'),
                 'searching' => __('Searching…', 'ticketops'),
                 'not_found' => __('No accessible user found.', 'ticketops'),
                 'target_entity' => __('Target entity', 'ticketops'),
                 'choose' => __('Choose explicitly', 'ticketops'),
-                'expected' => __('Expected result', 'ticketops'),
                 'remove' => __('Remove incompatible relation', 'ticketops'),
                 'email' => __('Email address', 'ticketops'),
-                'summary' => __('The target entity, optional requester and compatible organization shown above will be applied.', 'ticketops'),
                 'current_entity' => __('Current entity', 'ticketops'),
                 'optional_organization' => __('Optional ticket organization', 'ticketops'),
                 'category' => __('ITIL category', 'ticketops'),

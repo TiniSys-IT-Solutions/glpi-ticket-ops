@@ -5,22 +5,26 @@ declare(strict_types=1);
 namespace GlpiPlugin\Ticketops\Service;
 
 use Profile_User;
+use Ticket;
 use User;
 
 final class OrganizationOptionService
 {
-    public function isValid(string $kind, int $id, int $entityId): bool
+    public function isValid(string $kind, int $id, int $entityId, bool $selfAssignment = false): bool
     {
         if ($id <= 0) {
             return false;
         }
         if (in_array($kind, ['technician', 'observer'], true)) {
-            $user = new User();
-
-            return $user->getFromDB($id)
-                && (bool) ($user->fields['is_active'] ?? false)
-                && !(bool) ($user->fields['is_deleted'] ?? false)
-                && in_array($entityId, array_map('intval', Profile_User::getUserEntities($id, true)), true);
+            if (!User::isValidUserForEntity($id, $entityId)) {
+                return false;
+            }
+            return $kind !== 'technician' || in_array($entityId, array_map('intval', Profile_User::getUserEntitiesForRight(
+                $id,
+                'ticket',
+                $selfAssignment ? (Ticket::OWN | Ticket::STEAL) : Ticket::OWN,
+                true,
+            )), true);
         }
         $class = $this->classFor($kind);
         if ($class === null) {
@@ -32,7 +36,9 @@ final class OrganizationOptionService
         }
         $owner = (int) ($item->fields['entities_id'] ?? -1);
 
-        return $owner === $entityId || ((bool) ($item->fields['is_recursive'] ?? false)
+        return $owner === $entityId
+            || ($kind === 'location' && in_array($owner, array_map('intval', getSonsOf('glpi_entities', $entityId)), true))
+            || ((bool) ($item->fields['is_recursive'] ?? false)
             && in_array($entityId, array_map('intval', getSonsOf('glpi_entities', $owner)), true));
     }
 

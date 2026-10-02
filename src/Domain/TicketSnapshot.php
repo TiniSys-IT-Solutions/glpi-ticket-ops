@@ -10,6 +10,8 @@ final readonly class TicketSnapshot
      * @param list<array<string, mixed>> $requesters
      * @param list<array<string, mixed>> $assignees
      * @param list<array<string, mixed>> $observers
+     * @param array<string, mixed> $linkedState
+     * @param array<string, scalar|null> $nativeFields
      */
     public function __construct(
         public int $id,
@@ -27,6 +29,11 @@ final readonly class TicketSnapshot
         public int $assignedUserCount = 0,
         public int $assignedGroupCount = 0,
         public int $assignedSupplierCount = 0,
+        public int $status = 0,
+        public int $slaOwnId = 0,
+        public int $olaOwnId = 0,
+        public array $linkedState = [],
+        public array $nativeFields = [],
     ) {}
 
     /** @return array<string, mixed> */
@@ -34,6 +41,12 @@ final readonly class TicketSnapshot
     {
         return [
             'id' => $this->id,
+            'title' => $this->title,
+            'status' => $this->status,
+            'sla_own' => $this->slaOwnId,
+            'ola_own' => $this->olaOwnId,
+            'linked_state' => $this->linkedState,
+            'native_fields' => $this->nativeFields,
             'entity' => $this->entityId,
             'category' => $this->categoryId,
             'location' => $this->locationId,

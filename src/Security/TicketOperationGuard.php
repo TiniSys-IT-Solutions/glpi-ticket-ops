@@ -20,7 +20,8 @@ final class TicketOperationGuard
 
     public function canOperate(Ticket $ticket, ?int $targetEntity = null): bool
     {
-        if ($ticket->getID() <= 0 || (bool) ($ticket->fields['is_deleted'] ?? false)
+        if (Session::getCurrentInterface() !== 'central' || $ticket->getID() <= 0 || (bool) ($ticket->fields['is_deleted'] ?? false)
+            || !Session::haveRight('ticket', UPDATE)
             || !Profile::canSwitchRequesterAndEntity() || !$ticket->canViewItem() || !$ticket->canUpdateItem()
             || !Session::haveAccessToEntity((int) ($ticket->fields['entities_id'] ?? 0))) {
             return false;

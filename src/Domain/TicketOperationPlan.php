@@ -30,7 +30,29 @@ final readonly class TicketOperationPlan
         public array $blockers = [],
         public array $effects = [],
         public array $organizationChanges = [],
+        public ?string $ticketTitle = null,
     ) {}
+
+    /** @param list<string> $blockers */
+    public function withBlockers(array $blockers): self
+    {
+        return new self(
+            $this->ticketId,
+            $this->fingerprint,
+            $this->sourceEntityId,
+            $this->targetEntityId,
+            $this->replacedActor,
+            $this->newRequesterId,
+            $this->preservedRelations,
+            $this->incompatibilities,
+            $this->decisions,
+            $this->warnings,
+            array_values(array_unique([...$this->blockers, ...$blockers])),
+            $this->effects,
+            $this->organizationChanges,
+            $this->ticketTitle,
+        );
+    }
 
     public function isExecutable(): bool
     {

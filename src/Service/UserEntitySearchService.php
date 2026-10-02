@@ -15,8 +15,7 @@ final class UserEntitySearchService
     public function resolve(int $userId): ?array
     {
         $user = new User();
-        if ($userId <= 1 || !$user->getFromDB($userId) || !(bool) ($user->fields['is_active'] ?? false)
-            || (bool) ($user->fields['is_deleted'] ?? false) || !$this->isWithinValidityDates($user)) {
+        if ($userId <= 0 || !User::isValidUserForEntity($userId, Session::getActiveEntities()) || !$user->getFromDB($userId)) {
             return null;
         }
         $valid = EntityIntersection::validTargets(
@@ -30,12 +29,4 @@ final class UserEntitySearchService
         return ['user' => $user, 'entity_ids' => $valid, 'suggested_entity_id' => EntityIntersection::suggestedTarget($valid, (int) ($user->fields['entities_id'] ?? 0))];
     }
 
-    private function isWithinValidityDates(User $user): bool
-    {
-        $now = time();
-        $begin = (string) ($user->fields['begin_date'] ?? '');
-        $end = (string) ($user->fields['end_date'] ?? '');
-
-        return ($begin === '' || strtotime($begin) <= $now) && ($end === '' || strtotime($end) >= $now);
-    }
 }

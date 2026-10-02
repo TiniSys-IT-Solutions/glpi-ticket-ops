@@ -20,7 +20,7 @@ use Ticket;
 final class SearchOrganizationOptionsController extends AbstractController
 {
     #[Route('/TicketOps/Ticket/{id}/NativeFields', name: 'ticketops_native_fields', methods: 'GET', requirements: ['id' => '\\d+'])]
-    #[SecurityStrategy(Firewall::STRATEGY_AUTHENTICATED)]
+    #[SecurityStrategy(Firewall::STRATEGY_CENTRAL_ACCESS)]
     public function __invoke(Request $request, int $id): Response
     {
         Session::checkLoginUser();

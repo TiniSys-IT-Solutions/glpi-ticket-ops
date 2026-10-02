@@ -15,3 +15,7 @@
 .ticketops-modal select + .select2-container { max-width: 100%; width: 100% !important; }
 .ticketops-modal .select2-dropdown { max-width: min(100vw, 100%); }
 @media (max-width: 767.98px) { .ticketops-health-label { display: none; } }
+
+.ticketops-dialog-title { display: flex; align-items: center; flex: 1; min-width: 0; overflow: hidden; }
+.ticketops-dialog-title > i { flex-shrink: 0; }
+.ticketops-modal .modal-header .btn-close { flex-shrink: 0; }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GlpiPlugin\Ticketops\Service;
 
+use GlpiPlugin\Ticketops\Domain\RelationIdentity;
 use GlpiPlugin\Ticketops\Domain\TicketFingerprint;
 use GlpiPlugin\Ticketops\Domain\TicketOperationPlan;
 use Ticket;
@@ -17,20 +18,29 @@ final class TicketOperationPlanner
     ) {}
 
     /**
-     * @param list<int> $confirmedRemovalIds
+     * @param list<string> $confirmedRemovalKeys
      * @param array<string, int> $organizationChanges
      */
-    public function build(Ticket $ticket, int $replacedActorLinkId, int $newRequesterId, int $targetEntityId, array $confirmedRemovalIds = [], array $organizationChanges = []): TicketOperationPlan
+    public function build(Ticket $ticket, string $replacedActorKey, int $newRequesterId, int $targetEntityId, array $confirmedRemovalKeys = [], array $organizationChanges = [], ?string $ticketTitle = null): TicketOperationPlan
     {
-        $snapshot = $this->snapshots->fromTicket($ticket);
+        $snapshot = $this->snapshots->fromTicket($ticket, true);
         $blockers = [];
+        if ($ticketTitle !== null) {
+            $ticketTitle = trim($ticketTitle);
+            if ($ticketTitle === '' || mb_strlen($ticketTitle) > 255) {
+                $blockers[] = __('The ticket title must contain between 1 and 255 characters.', 'ticketops');
+            }
+            if ($ticketTitle === $snapshot->title) {
+                $ticketTitle = null;
+            }
+        }
         $replaced = [];
-        if ($replacedActorLinkId > 0 || $newRequesterId > 0) {
-            if ($replacedActorLinkId <= 0 || $newRequesterId <= 0) {
+        if ($replacedActorKey !== '' || $newRequesterId > 0) {
+            if ($replacedActorKey === '' || $newRequesterId <= 0) {
                 $blockers[] = __('The requester correction is incomplete.', 'ticketops');
             }
             foreach ($snapshot->requesters as $actor) {
-                if ((int) $actor['link_id'] === $replacedActorLinkId) {
+                if (RelationIdentity::key($actor) === $replacedActorKey) {
                     $replaced = $actor;
                     break;
                 }
@@ -43,7 +53,7 @@ final class TicketOperationPlanner
                 $blockers[] = __('The selected requester is not usable in the target entity.', 'ticketops');
             }
             foreach ($snapshot->requesters as $actor) {
-                if ((int) $actor['link_id'] !== $replacedActorLinkId && $actor['itemtype'] === 'User' && (int) $actor['items_id'] === $newRequesterId) {
+                if (RelationIdentity::key($actor) !== $replacedActorKey && $actor['itemtype'] === 'User' && (int) $actor['items_id'] === $newRequesterId) {
                     $blockers[] = __('The selected requester is already present on this ticket.', 'ticketops');
                 }
             }
@@ -58,7 +68,7 @@ final class TicketOperationPlanner
                 continue;
             }
             if (!in_array($kind, ['category', 'location', 'technician', 'observer'], true)
-                || !$organizationOptions->isValid($kind, (int) $id, $targetEntityId)) {
+                || !$organizationOptions->isValid($kind, (int) $id, $targetEntityId, isset($organizationChanges['status']))) {
                 $blockers[] = __('An organization choice is not valid in the target entity.', 'ticketops');
                 unset($organizationChanges[$kind]);
             } else {
@@ -66,29 +76,48 @@ final class TicketOperationPlanner
             }
         }
         $analysis = $this->relations->analyze($snapshot, $targetEntityId);
-        $analysis['preserved'] = array_values(array_filter(
-            $analysis['preserved'],
-            static fn(array $actor): bool => !(($actor['kind'] ?? '') === 'actor'
-                && (int) ($actor['type'] ?? 0) === 1
-                && $replacedActorLinkId > 0
-                && (string) ($actor['itemtype'] ?? '') === (string) ($replaced['itemtype'] ?? '')
-                && (int) ($actor['link_id'] ?? 0) === $replacedActorLinkId),
-        ));
+        // Validate the final choice rather than asking to remove a field already replaced.
+        $replacedFields = [];
+        foreach (['category' => 'itilcategories_id', 'location' => 'locations_id'] as $kind => $field) {
+            if (isset($organizationChanges[$kind])) {
+                $replacedFields[] = $field;
+            }
+        }
+        $replacesRelation = static function (array $relation) use ($replacedFields, $replacedActorKey, $organizationChanges): bool {
+            if (($relation['kind'] ?? '') === 'field') {
+                return in_array($relation['field'] ?? '', $replacedFields, true);
+            }
+            if (($relation['kind'] ?? '') !== 'actor') {
+                return false;
+            }
+            if ((int) $relation['type'] === 1 && $replacedActorKey !== '' && RelationIdentity::key($relation) === $replacedActorKey) {
+                return true;
+            }
+            return (int) $relation['type'] === 2 && $relation['itemtype'] === 'User'
+                && isset($organizationChanges['technician'])
+                && (int) $relation['items_id'] !== $organizationChanges['technician'];
+        };
+        $keepRelation = static fn(array $relation): bool => !$replacesRelation($relation);
+        $analysis['incompatible'] = array_values(array_filter($analysis['incompatible'], $keepRelation));
+        $analysis['preserved'] = array_values(array_filter($analysis['preserved'], $keepRelation));
         foreach ($analysis['incompatible'] as $relation) {
             if (!($relation['removable'] ?? false)) {
                 $blockers[] = sprintf(__('The incompatible relation %s cannot be removed safely by TicketOps.', 'ticketops'), (string) $relation['name']);
             }
         }
-        $incompatibleIds = array_map(
-            static fn(array $actor): int => (int) $actor['link_id'],
+        $incompatibleKeys = array_map(
+            RelationIdentity::key(...),
             array_values(array_filter($analysis['incompatible'], static fn(array $relation): bool => (bool) ($relation['removable'] ?? false))),
         );
-        $unconfirmed = array_diff($incompatibleIds, array_map('intval', $confirmedRemovalIds), [$replacedActorLinkId]);
+        // Accept only removals belonging to this plan, using type and role as well as link ID.
+        $confirmedRemovalKeys = array_values(array_unique(array_intersect($confirmedRemovalKeys, $incompatibleKeys)));
+        sort($confirmedRemovalKeys);
+        $unconfirmed = array_diff($incompatibleKeys, $confirmedRemovalKeys);
         if ($unconfirmed !== []) {
             $blockers[] = __('Every incompatible relation must be explicitly confirmed before removal.', 'ticketops');
         }
 
-        return new TicketOperationPlan(
+        $plan = new TicketOperationPlan(
             $snapshot->id,
             TicketFingerprint::fromState($snapshot->fingerprintData()),
             $snapshot->entityId,
@@ -97,7 +126,7 @@ final class TicketOperationPlanner
             $newRequesterId,
             $analysis['preserved'],
             $analysis['incompatible'],
-            ['remove_relation_ids' => array_map('intval', $confirmedRemovalIds)],
+            ['remove_relation_keys' => $confirmedRemovalKeys],
             $analysis['warnings'],
             $blockers,
             [
@@ -105,6 +134,9 @@ final class TicketOperationPlanner
                 'rules' => __('GLPI will evaluate its native ONUPDATE rules; TicketOps requests no additional replay.', 'ticketops'),
             ],
             $organizationChanges,
+            $ticketTitle,
         );
+
+        return $plan->withBlockers((new TicketOperationValidator())->validate($ticket, $plan, $snapshot));
     }
 }
