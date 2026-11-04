@@ -52,6 +52,9 @@
   "config": {
     "optimize-autoloader": true,
     "sort-packages": true,
-    "autoloader-suffix": "PluginTicketops"
+    "autoloader-suffix": "PluginTicketops",
+    "platform": {
+      "php": "8.3.0"
+    }
   }
 }
