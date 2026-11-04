@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.12 - 2026-10-08
+
+### Changed
+
+- provide installation troubleshooting for repeated plugin startup warnings and old controller namespace mismatches;
+- distribute the installable directory as `dist/ticketops/` and the archive as `ticketops-0.1.12.zip`, following the TiniSys reference;
+- verify controller loading in the production package before distribution, complete translation metadata and stabilize build timestamps for repeatable archives.
+
 ## 0.1.11 - 2026-10-02
 
 ### Fixed

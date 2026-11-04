@@ -338,5 +338,5 @@
   }
 
   window.GLPI = window.GLPI || {};
-  window.GLPI.TicketOperations = Object.freeze({version: '0.1.11'});
+  window.GLPI.TicketOperations = Object.freeze({version: '0.1.12'});
 })();

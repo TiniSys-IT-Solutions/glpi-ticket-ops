@@ -22,7 +22,8 @@
     "test:js": "node --test tests/JavaScript/*.cjs",
     "analyse": "phpstan analyse --no-progress",
     "cs:check": "php-cs-fixer check --diff",
-    "quality": ["@lint", "@test", "@test:js", "@analyse", "@cs:check"]
+    "bootstrap:check": ["@php scripts/check-bootstrap.php . composer", "@php scripts/check-bootstrap.php . native"],
+    "quality": ["@lint", "@bootstrap:check", "@test", "@test:js", "@analyse", "@cs:check"]
   },
   "config": {"optimize-autoloader": true, "sort-packages": true}
 }

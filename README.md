@@ -5,7 +5,7 @@
 <h1 align="center">TicketOps</h1>
 
 <p align="center">
-  <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases"><img src="https://img.shields.io/badge/version-0.1.11-0ea5e9" alt="Version 0.1.11"></a>
+  <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases"><img src="https://img.shields.io/badge/version-0.1.12-0ea5e9" alt="Version 0.1.12"></a>
   <img src="https://img.shields.io/badge/GLPI-11.0.8%E2%80%93%3C11.1.0-0b7285" alt="GLPI 11.0.8 to below 11.1.0">
   <img src="https://img.shields.io/badge/PHP-%E2%89%A58.2-777bb4" alt="PHP 8.2 or newer">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-16a34a" alt="GPL-3.0-or-later"></a>
@@ -16,9 +16,13 @@ TicketOps is a GLPI 11 plugin for safe, previewed and controlled operations on e
 
 > Faciliter la qualification, l’organisation et l’affectation des tickets GLPI sans contourner le modèle multi-entités.
 
-Version `0.1.11` strengthens native authorization, shared-document scope and concurrency checks, and simplifies the reorganization dialog with title correction and validation on Apply, while retaining native GLPI selectors, requester/entity intersection, immutable plans, relation-preserving updates and field-level visual diagnostics.
+Version `0.1.12` adds startup troubleshooting and stronger package checks under the TiniSys plugin reference. Native GLPI selectors, requester/entity intersection, immutable plans, relation-preserving updates and field-level visual diagnostics are retained.
 
 Diagnostics, requester/entity correction, organization and quick assignment can be enabled independently from the TicketOps configuration page. Diagnostics are enabled by default; every mutation module remains disabled until an administrator explicitly enables it.
+
+## Installation and configuration
+
+Extract `ticketops-0.1.12.zip` into GLPI's `plugins/` directory so that `plugins/ticketops/setup.php` exists. Install and activate **TicketOps** in **Setup > Plugins**, review the two TicketOps rights on central profiles, then enable only the required operation modules on its configuration page. See [installation and startup troubleshooting](docs/installation.md) and [upgrade](docs/upgrade.md).
 
 ## Usage
 
@@ -48,9 +52,13 @@ composer quality
 ./scripts/build-release.sh
 ```
 
+Development tools and tests remain local to the development workspace. The build produces `dist/ticketops/` and `dist/ticketops-0.1.12.zip`; the ZIP contains only installable files. Translation headers and ZIP metadata use `SOURCE_DATE_EPOCH`, defaulting to the latest Git commit timestamp, for repeatable builds with the same source and toolchain.
+
 The installable directory must be named exactly `ticketops`. See [installation](docs/installation.md), [architecture](docs/architecture.md), [permissions](docs/permissions.md), [security](docs/security.md) and [ticket workflow](docs/ticket-workflow.md).
 
 The operation is limited to Ticket in the central interface. Change and Problem are intentionally unsupported.
+
+The plugin is licensed under GPL-3.0-or-later. Copyright (C) 2026 TiniSys IT Solutions.
 
 ## Project links
 
