@@ -1,6 +1,6 @@
 # Installation
 
-TicketOps 0.1.12 requires GLPI 11.0.8 up to, but excluding, 11.1.0 and PHP 8.2 or newer.
+TicketOps 0.2.0 requires GLPI 12.0.8 up to, but excluding, 12.1.0 and PHP 8.3 or newer.
 
 1. Extract the release ZIP in GLPI's `plugins/` directory.
 2. Ensure the resulting path is exactly `plugins/ticketops`.

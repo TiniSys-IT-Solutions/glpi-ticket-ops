@@ -1,0 +1,8 @@
+parameters:
+    level: 8
+    paths:
+        - src
+    scanFiles:
+        - tests/StaticAnalysis/glpi-stubs.php
+        - tests/StaticAnalysis/framework-stubs.php
+    tmpDir: .phpunit.cache/phpstan

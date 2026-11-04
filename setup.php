@@ -12,10 +12,10 @@ use GlpiPlugin\Ticketops\Ui\TicketTab;
 
 defined('GLPI_ROOT') or die('No direct access allowed');
 
-const PLUGIN_TICKETOPERATIONS_VERSION = '0.1.12';
-const PLUGIN_TICKETOPERATIONS_MIN_GLPI = '11.0.8';
-const PLUGIN_TICKETOPERATIONS_MAX_GLPI = '11.1.0';
-const PLUGIN_TICKETOPERATIONS_MIN_PHP = '8.2.0';
+const PLUGIN_TICKETOPERATIONS_VERSION = '0.2.0';
+const PLUGIN_TICKETOPERATIONS_MIN_GLPI = '12.0.0';
+const PLUGIN_TICKETOPERATIONS_MAX_GLPI = '12.1.0';
+const PLUGIN_TICKETOPERATIONS_MIN_PHP = '8.3.0';
 
 function plugin_ticketops_autoload(): void
 {
@@ -45,7 +45,6 @@ function plugin_init_ticketops(): void
     global $PLUGIN_HOOKS;
 
     plugin_ticketops_autoload();
-    $PLUGIN_HOOKS[Hooks::CSRF_COMPLIANT]['ticketops'] = true;
 
     $hookManager = new HookManager('ticketops');
     $hookManager->registerCSSFile('css/ticketoperations.css');

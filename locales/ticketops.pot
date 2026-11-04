@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TicketOps 0.1.12\n"
+"Project-Id-Version: TicketOps 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-02 12:17+0000\n"
-"PO-Revision-Date: 2026-10-02 12:17+0000\n"
+"POT-Creation-Date: 2026-11-04 08:56+0000\n"
+"PO-Revision-Date: 2026-11-04 08:56+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -150,7 +150,7 @@ msgid "No organization inconsistency was detected."
 msgstr ""
 
 #: src/Profile.php:31 src/Profile.php:51 src/Ui/TicketTab.php:33
-#: src/Ui/TicketPanel.php:105 setup.php:74
+#: src/Ui/TicketPanel.php:105 setup.php:73
 msgid "TicketOps"
 msgstr ""
 

@@ -1,4 +1,9 @@
 <p align="center">
+
+> Branche `glpi-v12` : version 0.2.0 pour GLPI 12.0.x et PHP 8.3+.
+> Les versions GLPI 11 restent disponibles sur `main` et dans les tags précédents.
+> Migration en cours de revue ; voir `docs/GLPI12_MIGRATION.md` pour les contrôles et limites.
+
   <img src="public/logo.png" alt="TicketOps" width="220">
 </p>
 
@@ -6,13 +11,13 @@
 
 <p align="center">
   <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/releases"><img src="https://img.shields.io/badge/version-0.1.12-0ea5e9" alt="Version 0.1.12"></a>
-  <img src="https://img.shields.io/badge/GLPI-11.0.8%E2%80%93%3C11.1.0-0b7285" alt="GLPI 11.0.8 to below 11.1.0">
-  <img src="https://img.shields.io/badge/PHP-%E2%89%A58.2-777bb4" alt="PHP 8.2 or newer">
+  <img src="https://img.shields.io/badge/GLPI-12.0.8%E2%80%93%3C12.1.0-0b7285" alt="GLPI 12.0.8 to below 12.1.0">
+  <img src="https://img.shields.io/badge/PHP-%E2%89%A58.3-777bb4" alt="PHP 8.3 or newer">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-16a34a" alt="GPL-3.0-or-later"></a>
   <a href="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/actions/workflows/quality.yml"><img src="https://github.com/TiniSys-IT-Solutions/glpi-ticket-ops/actions/workflows/quality.yml/badge.svg" alt="Quality"></a>
 </p>
 
-TicketOps is a GLPI 11 plugin for safe, previewed and controlled operations on existing tickets.
+TicketOps is a GLPI 12 plugin for safe, previewed and controlled operations on existing tickets.
 
 > Faciliter la qualification, l’organisation et l’affectation des tickets GLPI sans contourner le modèle multi-entités.
 
@@ -40,8 +45,8 @@ TicketOps:
 
 ## Requirements
 
-- GLPI 11.0.8 through versions strictly below 11.1.0;
-- PHP 8.2 or newer;
+- GLPI 12.0.8 through versions strictly below 12.1.0;
+- PHP 8.3 or newer;
 - Composer 2, Node.js and GNU gettext for development and releases.
 
 ## Development
