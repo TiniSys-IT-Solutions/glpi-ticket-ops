@@ -1,20 +1,34 @@
 {
   "name": "tinisys-it-solutions/glpi-ticket-ops",
-  "description": "Safe, previewed and controlled ticket operations for GLPI 11.",
+  "description": "Safe, previewed and controlled ticket operations for GLPI 12.",
   "type": "glpi-plugin",
   "license": "GPL-3.0-or-later",
-  "authors": [{"name": "TiniSys IT Solutions"}],
-  "require": {"php": ">=8.2"},
+  "authors": [
+    {
+      "name": "TiniSys IT Solutions"
+    }
+  ],
+  "require": {
+    "php": ">=8.3"
+  },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.80",
     "glpi-project/tools": "^0.8",
     "phpstan/phpstan": "^2.1",
     "phpunit/phpunit": "^11.0"
   },
-  "autoload": {"psr-4": {"GlpiPlugin\\Ticketops\\": "src/"}},
+  "autoload": {
+    "psr-4": {
+      "GlpiPlugin\\Ticketops\\": "src/"
+    }
+  },
   "autoload-dev": {
-    "psr-4": {"GlpiPlugin\\Ticketops\\Tests\\Unit\\": "tests/Unit/"},
-    "exclude-from-classmap": ["tests/StaticAnalysis/"]
+    "psr-4": {
+      "GlpiPlugin\\Ticketops\\Tests\\Unit\\": "tests/Unit/"
+    },
+    "exclude-from-classmap": [
+      "tests/StaticAnalysis/"
+    ]
   },
   "scripts": {
     "lint": "find . -path ./vendor -prune -o -path ./dist -prune -o -path ./.local -prune -o -path ./.phpunit.cache -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l",
@@ -22,8 +36,22 @@
     "test:js": "node --test tests/JavaScript/*.cjs",
     "analyse": "phpstan analyse --no-progress",
     "cs:check": "php-cs-fixer check --diff",
-    "bootstrap:check": ["@php scripts/check-bootstrap.php . composer", "@php scripts/check-bootstrap.php . native"],
-    "quality": ["@lint", "@bootstrap:check", "@test", "@test:js", "@analyse", "@cs:check"]
+    "bootstrap:check": [
+      "@php scripts/check-bootstrap.php . composer",
+      "@php scripts/check-bootstrap.php . native"
+    ],
+    "quality": [
+      "@lint",
+      "@bootstrap:check",
+      "@test",
+      "@test:js",
+      "@analyse",
+      "@cs:check"
+    ]
   },
-  "config": {"optimize-autoloader": true, "sort-packages": true}
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "autoloader-suffix": "PluginTicketops"
+  }
 }
