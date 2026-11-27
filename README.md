@@ -1,6 +1,6 @@
 <p align="center">
 
-> Branche `glpi-v12` : version 0.2.0 pour GLPI 12.0.x et PHP 8.3+.
+> Branche `glpi-v12` : version 0.2.0-glpi12-beta.1 pour GLPI 12.0.x et PHP 8.3+.
 > Les versions GLPI 11 restent disponibles sur `main` et dans les tags précédents.
 > Migration en cours de revue ; voir `docs/GLPI12_MIGRATION.md` pour les contrôles et limites.
 

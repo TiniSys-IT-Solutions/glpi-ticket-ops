@@ -11,7 +11,7 @@ test('the bootstrap exposes an immutable namespaced version', () => {
   const window = {};
   vm.runInNewContext(source, {window});
 
-  assert.equal(window.GLPI.TicketOperations.version, '0.2.0');
+  assert.equal(window.GLPI.TicketOperations.version, '0.2.0-glpi12-beta.1');
   assert.equal(Object.isFrozen(window.GLPI.TicketOperations), true);
 });
 

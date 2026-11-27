@@ -14,6 +14,6 @@ final class PluginTest extends TestCase
         self::assertSame('ticketops', Plugin::KEY);
         self::assertSame('TicketOps', Plugin::NAME);
         self::assertSame('TicketOps', Plugin::SHORT_NAME);
-        self::assertSame('0.2.0', Plugin::VERSION);
+        self::assertSame('0.2.0-glpi12-beta.1', Plugin::VERSION);
     }
 }

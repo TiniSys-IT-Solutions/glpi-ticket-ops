@@ -12,7 +12,7 @@ use GlpiPlugin\Ticketops\Ui\TicketTab;
 
 defined('GLPI_ROOT') or die('No direct access allowed');
 
-const PLUGIN_TICKETOPERATIONS_VERSION = '0.2.0';
+const PLUGIN_TICKETOPERATIONS_VERSION = '0.2.0-glpi12-beta.1';
 const PLUGIN_TICKETOPERATIONS_MIN_GLPI = '12.0.0';
 const PLUGIN_TICKETOPERATIONS_MAX_GLPI = '12.1.0';
 const PLUGIN_TICKETOPERATIONS_MIN_PHP = '8.3.0';

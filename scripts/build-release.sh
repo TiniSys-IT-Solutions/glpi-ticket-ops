@@ -39,7 +39,7 @@ php -r '$xml = simplexml_load_file("ticketops.xml"); exit($xml === false ? 1 : 0
 
 rm -rf "${DIST_DIR}"
 vendor/bin/extract-locales
-msgfilter --keep-header -i locales/en_GB.po -o locales/ticketops.pot true
+msgfilter --keep-header -i locales/en_GB.po -o locales/ticketops.pot sed -n -e ''
 rm -f locales/ticketoperations.pot
 sed -i "s/Project-Id-Version: PACKAGE VERSION/Project-Id-Version: TicketOps ${VERSION}/" locales/ticketops.pot locales/en_GB.po
 msgattrib --clear-fuzzy --output-file=locales/en_GB.po locales/en_GB.po
