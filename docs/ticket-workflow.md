@@ -2,7 +2,7 @@
 
 ## Ticket organization
 
-The Ticket-only section uses GLPI 11's `post_itil_info_section` hook. It appears only for a saved, accessible ticket and distinguishes success, information, warning and blocking findings.
+The Ticket-only section uses GLPI 12's `post_itil_info_section` hook. It appears only for a saved, accessible ticket and distinguishes success, information, warning and blocking findings.
 
 ## Controlled correction
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0-glpi12-beta.1 - 2026-11-27
+
+First version compatible with GLPI 12.
+
+Préversion qualifiée sur GLPI 12.0.2. PHP 8.3 minimum.
+
+- Align native ticket and profile integration with GLPI 12 model signatures and request handling.
+- Maintain authorization checks before applying the previewed operation through the native ticket API.
+- Verify profile rights, a synthetic ticket update and reproducible archive generation on the GLPI 12 branch.
+
 ## 0.1.12 - 2026-10-08
 
 ### Changed

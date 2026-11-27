@@ -30,7 +30,7 @@ final class TicketTab extends CommonGLPI
             ));
         }
 
-        return self::createTabEntry(__('TicketOps', 'ticketops'), $issueCount, $item::getType(), 'ti ti-heartbeat');
+        return self::createTabEntry(__('TicketOps', 'ticketops'), $issueCount, $item::class, 'ti ti-heartbeat');
     }
 
     /**

@@ -6,7 +6,7 @@ The plugin uses the GLPI-key-aligned PSR-4 namespace `GlpiPlugin\Ticketops`. `se
 
 The source folders reflect intended dependency direction:
 
-- `Controller`: thin HTTP adapters using GLPI 11 attributed routes;
+- `Controller`: thin HTTP adapters using GLPI 12 attributed routes;
 - `Ui`: official hook rendering and progressive enhancement;
 - `Service`: application orchestration and GLPI adapters;
 - `Security`: authorization and entity-scope policies;
@@ -15,7 +15,7 @@ The source folders reflect intended dependency direction:
 
 All layers are populated. `TicketSnapshot` is the canonical normalized state shared by diagnostic, plan and concurrency checks. `TicketOperationPlan` is immutable and contains every warning, blocker, relation decision and expected side effect.
 
-## Confirmed GLPI 11 integration points
+## Confirmed GLPI 12 integration points
 
 - `post_itil_info_section` renders the Ticket-only diagnostic block and its stable fallback action.
 - Controllers under `src/Controller` are automatically discovered by `Glpi\Routing\PluginRoutesLoader`.
@@ -26,7 +26,7 @@ All layers are populated. `TicketSnapshot` is the canonical normalized state sha
 
 There is no menu, plugin table or generic CRUD model. A single guarded legacy configuration endpoint is justified by the need to enable each implemented functional module independently; it stores values through GLPI's native configuration API.
 
-The immutable planner and executor share a native input builder, including complete deletion descriptors for GLPI rule processing. Detailed linked-record snapshots are limited to preparation and execution. The executor rebuilds the plan under a read lock on the ticket row. GLPI 11 disables `DBmysql::query()`; the fixed, integer-ID-only `SELECT ... FOR UPDATE` uses the supported `DBmysql::doQuery()` API because the native query builder has no row-lock option. All ticket writes still use `Ticket::update()`.
+The immutable planner and executor share a native input builder, including complete deletion descriptors for GLPI rule processing. Detailed linked-record snapshots are limited to preparation and execution. The executor rebuilds the plan under a read lock on the ticket row. GLPI 12 disables `DBmysql::query()`; the fixed, integer-ID-only `SELECT ... FOR UPDATE` uses the supported `DBmysql::doQuery()` API because the native query builder has no row-lock option. All ticket writes still use `Ticket::update()`.
 
 Ticket mutation is a single native `Ticket::update()` carrying the target entity and final actor lists inside a database transaction. GLPI performs its own consistency checks, history, hooks and notification. A database rollback cannot undo an already executed external hook; this limitation is why TicketOps performs every deterministic validation before update and does not add external side effects.
 

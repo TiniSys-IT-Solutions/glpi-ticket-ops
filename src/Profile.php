@@ -28,7 +28,7 @@ final class Profile extends \Profile
         return $item instanceof \Profile
             && $item->getID() > 0
             && ($item->fields['interface'] ?? '') === 'central'
-            ? self::createTabEntry(__('TicketOps', 'ticketops'), 0, $item::getType(), 'ti ti-ticket')
+            ? self::createTabEntry(__('TicketOps', 'ticketops'), 0, $item::class, 'ti ti-ticket')
             : '';
     }
 
